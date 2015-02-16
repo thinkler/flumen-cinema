@@ -1,0 +1,62 @@
+!!!
+%html
+  %head
+    %title Cinema
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  -#  Nav panel
+  .container
+    .navbar.navbar-default
+      .navbar-header
+        %button.navbar-toggle{"data-toggle" => "collapse", "data-target" => "#drop-menu"}
+          %span.sr-only Toggle nav
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        .navbar-brand
+          = link_to "Flumen", root_path
+      .collapse.navbar-collapse#drop-menu
+        %ul.nav.navbar-nav
+          %li
+            %a Actors
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", "role" => "button"}
+              Movies
+              .caret
+              %ul.dropdown-menu{:role => "menu"}
+                %li
+                  %a Actions
+                %li
+                  %a Thrillers
+                %li
+                  %a Comedies
+                %li.divider
+                %li
+                  %a Full list
+          %li
+            %a News
+          %li
+            %a Reviews
+        %ul.user-info.nav.navbar-nav.navbar-right
+          %li
+            %a Login
+          %li
+            %a Sign in
+        %form.navbar-form.navbar-center{:role => "search"}
+          .form-group
+            %input.form-control{:type => "text", :placeholder => "Search"}
+          %button.btn.btn-default.center
+            Search
+
+  %body
+    -#.center.notice
+    -#  = notice if notice
+    -#.center.alert
+    -#  = alert if alert
+    = yield
+    .footer
+      Flumen © 2015
+      %br
+      Oleg Makare
