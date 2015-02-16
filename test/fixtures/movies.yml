@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  box_office: 1.5
+  poster_url: MyString
+  desc: MyText
+  trailer_url: MyString
+  rating: 1
+
+two:
+  name: MyString
+  box_office: 1.5
+  poster_url: MyString
+  desc: MyText
+  trailer_url: MyString
+  rating: 1

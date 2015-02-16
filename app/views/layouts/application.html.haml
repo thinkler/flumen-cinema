@@ -41,8 +41,11 @@
             %a Reviews
         %ul.user-info.nav.navbar-nav.navbar-right
           - if user_signed_in?
-            %li
-              = link_to "Hello #{current_user.email}"
+            %li.admin
+              - if current_user.admin?
+                = link_to "Hello admin"
+              - else
+                = link_to "Hello #{current_user.email}"
             %li
               = link_to "Exit", destroy_user_session_path, method: :delete
           - else
