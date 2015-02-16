@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   root 'home#home'
 
+  resources :movies
+  resources :actors
+  resources :reviews
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
