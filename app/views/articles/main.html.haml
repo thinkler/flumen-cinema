@@ -1,0 +1,333 @@
+.container
+  .row
+
+    -#NEWS BAR
+
+    .col-md-8.col-sm-8.col-xs-12#content
+      - @articles.each do |a|
+        = link_to "delete", a, method: :delete, class: "btn btn-danger"
+        = link_to "update", a, method: :delete, class: "btn btn-danger"
+        .thumbnail
+          = image_tag(a.img_url)
+          .caption
+            %h2
+              = a.title
+            %p
+              = a.body
+            %button.btn.btn-primary
+              Comments
+              .badge
+                = a.comments.count
+            %button.btn.btn-danger
+              Rating
+              .badge
+                = a.rating
+            .post-data
+              = a.created_at.strftime("%d %b. %Y")
+              = a.created_at.strftime("%H:%M")
+
+    -#USER BAR
+    .col-md-4.col-sm-4.col-xs-12
+      .panel.panel-default
+        .panel-heading.center User info
+        .panel-body
+          - if user_signed_in?
+            - if current_user.admin?
+              = render partial: "admin_panel"
+            - else
+              = render partial: "user_panel"
+            = link_to "Exit", destroy_user_session_path, method: :delete
+          - else
+            %li
+              = link_to "Sign in", new_user_session_path
+            %li
+              = link_to "Sign up", new_user_registration_path
+
+    -#SIDE BAR
+
+    -#  FACTS BLOCK
+
+    .col-md-4.col-sm-4.col-xs-12#side-bar
+      .panel.panel-info
+        .panel-heading.center Interesting fact #40
+        .panel-body
+          Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+
+    -#  POSTERS BLOCK
+
+    .col-md-4.col-sm-4.col-xs-12#side-bar
+      .panel.panel-info
+        .panel-heading.center
+          Posters
+        .panel-body
+          #myCar.carousel.slide{"data-ride" => "carousel"}
+
+            -#Slider indicator
+            %ol.carousel-indicators
+              %li.active{"data-target" => "#myCar", "data-slide-to" => "0"}
+              %li{"data-target" => "#myCar", "data-slide-to" => "1"}
+              %li{"data-target" => "#myCar", "data-slide-to" => "2"}
+
+            -#Slides
+            .carousel-inner
+              .item.active
+                %img{:src => "http://st.kp.yandex.net/images/film_big/505966.jpg"}
+              .item
+                %img{:src => "http://st.kp.yandex.net/images/film_big/505966.jpg"}
+              .item
+                %img{:src => "http://st.kp.yandex.net/images/film_big/505966.jpg"}
+
+            -#Slider arrows
+            %a.left.carousel-control{:role => "button", :href => "#myCar", "data-slide" => "prev"}
+              .glyphicon.glyphicon-chevron-left
+
+            %a.right.carousel-control{:role => "button", :href => "#myCar", "data-slide" => "next"}
+              .glyphicon.glyphicon-chevron-right
+
+    -#  BOX OFFICE
+
+    .col-md-4.col-sm-4.col-xs-12#side-bar
+      .panel.panel-info
+        .panel-heading.center Box office
+        .panel-body
+          %table.table
+            %tr
+              %td
+                Movie #1
+              %td
+                LOTS OF $
+            %tr
+              %td
+                Movie #1
+              %td
+                LOTS OF $
+            %tr
+              %td
+                Movie #1
+              %td
+                LOTS OF $
+            %tr
+              %td
+                Movie #1
+              %td
+                LOTS OF $
+
+    -#  INFO TOPS
+
+    .col-md-4.col-sm-4.col-xs-12#side-bar
+      #accordion.panel-group
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{:href => "#collapse-1", "data-parent" => "#accordion", "data-toggle" => "collapse"}
+                Top rated news
+          #collapse-1.panel-collapse.collapse.in
+            .panel-body
+              %ul
+                %li
+                  %h1 News title
+                  %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                %li
+                  %h1 News title
+                  %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                %li
+                  %h1 News title
+                  %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{:href => "#collapse-2", "data-parent" => "#accordion", "data-toggle" => "collapse"}
+                Top rated comments
+          #collapse-2.panel-collapse.collapse
+            .panel-body
+              %ul
+                %li
+                  %h1 AMAZING COMMENT
+                  %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                %li
+                  %h1 AMAZING COMMENT
+                  %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                %li
+                  %h1 AMAZING COMMENT
+                  %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+        .panel.panel-default
+          .panel-heading
+            %h4.panel-title
+              %a{:href => "#collapse-3", "data-parent" => "#accordion", "data-toggle" => "collapse"}
+                Top rated reviews
+          #collapse-3.panel-collapse.collapse
+            .panel-body
+              %ul
+                %li
+                  %h1 AMAZING REVIEW
+                  %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                %li
+                  %h1 AMAZING REVIEW
+                  %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                %li
+                  %h1 AMAZING REVIEW
+                  %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+
+
+
+
+      %nav.center
+
+
+  -#PAGES
+.center
+  %ul.pagination
+    %li.active
+      %a 1
+    %li
+      %a 2
+    %li
+      %a 3
+    %li
+      %a 4
+    %li
+      %a 5
+
+
+
+      -#
+      -#.container
+      -#  .row
+      -#    %a.btn.btn-info{:href => "#"}
+      -#      .fa.fa-spinner.fa-spin
+      -#    %a.btn.btn-danger{:href => "#"} Button
+      -#    %a.btn.btn-link{:href => "#"} Button
+      -#
+      -#    %p
+      -#      %a.btn.btn-default.btn-lg But
+      -#      %a.btn.btn-default But
+      -#      %a.btn.btn-default.btn-sm But
+      -#      %a.btn.btn-default.btn-xs But
+      -#    %p
+      -#      %a.btn.btn-primary.btn-block.active Some
+      -#      %a.btn.btn-primary.btn-block.disabled Some
+      -#
+      -#.container
+      -#  .row
+      -#    .btn-toolbar
+      -#      .btn-group
+      -#        .btn.btn-default{:href => "#"}
+      -#          .fa.fa-spinner.fa-spin
+      -#        .btn.btn-primary{:href => "#"} Button
+      -#        .btn.btn-success{:href => "#"} Button
+      -#        .btn.btn-warning{:href => "#"} Button
+      -#      .btn-group
+      -#        .btn.btn-default{:href => "#"}
+      -#          .fa.fa-spinner.fa-spin
+      -#        .btn.btn-primary{:href => "#"} Button
+      -#        .btn.btn-success{:href => "#"} Button
+      -#        .btn.btn-warning{:href => "#"} Button
+      -#      .btn-group
+      -#        .btn.btn-default{:href => "#"}
+      -#          .fa.fa-spinner.fa-spin
+      -#        .btn.btn-primary{:href => "#"} Button
+      -#        .btn.btn-success{:href => "#"} Button
+      -#        .btn.btn-warning{:href => "#"} Button
+      -#    %br
+      -#    .btn-toolbar
+      -#      .btn-group.btn-group-vertical
+      -#        .btn.btn-default{:href => "#"}
+      -#          .fa.fa-spinner.fa-spin
+      -#        .btn.btn-primary{:href => "#"} Button
+      -#        .btn.btn-success{:href => "#"} Button
+      -#        .btn.btn-warning{:href => "#"} Button
+      -#
+      -#.container
+      -#  .row
+      -#    .col-md-6
+      -#    .col-md-6
+      -#      .btn-group.pull-right.dropup
+      -#        .btn.btn-lg.btn-default
+      -#          Drop
+      -#        %ul.dropdown-menu
+      -#          %li
+      -#            %a One
+      -#          %li
+      -#            %a One
+      -#          %li
+      -#            %a One
+      -#        .btn.btn-success.btn-lg.dropdown-toggle{"data-toggle" => "dropdown"}
+      -#          .caret
+      -#    %br
+      -#    %br
+      -#    %br
+      -#    %br
+      -#    %br
+      -#    %br
+      -#    %br
+      -#
+      -#.container
+      -#  .row
+      -#    .col-md-6
+      -#      .tabs
+      -#        %ul.nav.nav-tabs
+      -#          %li.active
+      -#            %a{:href => "#tab-1", "data-toggle" => "tab"} One
+      -#          %li
+      -#            %a{:href => "#tab-2", "data-toggle" => "tab"} Two
+      -#          %li
+      -#            %a{:href => "#tab-3", "data-toggle" => "tab"} Three
+      -#        .tab-content
+      -#          #tab-1.tab-pane.fade.in.active
+      -#            %p LOL XD OMG
+      -#          #tab-2.tab-pane.fade
+      -#            %p Some txt
+      -#          #tab-3.tab-pane.fade
+      -#            %p Some u mom here
+      -#    .col-md-6
+      -#      %a#spoiler.btn.btn-primary.collapsed{:href => "#spoil-1", "data-toggle" => "collapse"}
+      -#        Spoiler
+      -#      .collapse#spoil-1
+      -#        .well
+      -#          %p Wellll well now
+      -#
+      -#
+      -#.container
+      -#  .row
+      -#    .col-md-4
+      -#    .col-md-4
+
+      -#
+      -#    .col-md-4
+      -#
+      -#
+      -#.container
+      -#  .row
+      -#    .col-md-4.col-md-offset-4
+      -#      %h1
+      -#        %abbr{:title => "Oleg"}
+      -#          Oleg
+      -#      %kbd Ann
+      -#      %kbd i miss u
+      -#      %pre Include some HAPPINNES
+      -#      %table.table.table-striped.table-hover
+      -#        %thead
+      -#          %tr
+      -#            %th Some
+      -#            %th New
+      -#            %th Shit
+      -#        %tr
+      -#          %td Some
+      -#          %td New
+      -#          %td Shit
+      -#        %tr
+      -#          %td Some
+      -#          %td New
+      -#          %td Shit
+      -#        %tr
+      -#          %td Some
+      -#          %td New
+      -#          %td Shit
+      -#        %tr
+      -#          %td Some
+      -#          %td New
+      -#          %td Shit
+      -#        %tr
+      -#          %td Some
+      -#          %td New
+      -#          %td Shit
