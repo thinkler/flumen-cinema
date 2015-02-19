@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
 
+  before_action :check_in, except: :main
+
   def new
     @article = Article.new
   end
@@ -24,8 +26,26 @@ class ArticlesController < ApplicationController
     @articles = Article.all
   end
 
+  def edit
+    @article = Article.find(params[:id])
+  end
+
+  def update
+    @article = Article.find(params[:id])
+    if @article.update(article_params)
+      redirect_to root_url
+    end
+  end
 
   private
+
+  def check_in
+    if current_user
+      redirect_to new_user_session_path unless current_user.admin?
+    else
+      redirect_to new_user_session_path
+    end
+  end
 
   def article_params
     params.require(:article).permit(:title, :body, :img_url)

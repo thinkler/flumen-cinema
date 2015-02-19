@@ -22,7 +22,8 @@
           %li
             %a Actors
           %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", "role" => "button"}
+            = link_to "Movies", movies_path
+            -#%a.dropdown-toggle{"data-toggle" => "dropdown", "role" => "button", :url => "#{movies_path}"}
               Movies
               .caret
               %ul.dropdown-menu{:role => "menu"}
@@ -36,7 +37,7 @@
                 %li
                   %a Full list
           %li
-            %a News
+            = link_to "News", root_path
           %li
             %a Reviews
         %ul.user-info.nav.navbar-nav.navbar-right
@@ -52,8 +53,118 @@
     -#  = notice if notice
     -#.center.alert
     -#  = alert if alert
-    = yield
-    .footer
-      Flumen © 2015
-      %br
-      Oleg Makare
+
+    .container
+      .row
+        .col-md-8.col-sm-8.col-xs-12#content
+          = yield
+
+        -#USER PANEL
+        .col-md-4.col-sm-4.col-xs-12
+          .panel.panel-default
+            .panel-heading.center User info
+            .panel-body
+              - if user_signed_in?
+                - if current_user.admin?
+                  = render partial: "articles/admin_panel"
+                - else
+                  = render partial: "articles/user_panel"
+                = link_to "Exit", destroy_user_session_path, method: :delete
+              - else
+                %li
+                  = link_to "Sign in", new_user_session_path
+                %li
+                  = link_to "Sign up", new_user_registration_path
+        -#  POSTERS BLOCK
+        .col-md-4.col-sm-4.col-xs-12#side-bar
+          .panel.panel-info
+            .panel-heading.center
+              Posters
+            .panel-body
+              #myCar.carousel.slide{"data-ride" => "carousel"}
+
+                -#Slider indicator
+                %ol.carousel-indicators
+                  %li.active{"data-target" => "#myCar", "data-slide-to" => "0"}
+                  %li{"data-target" => "#myCar", "data-slide-to" => "1"}
+                  %li{"data-target" => "#myCar", "data-slide-to" => "2"}
+
+                -#Slides
+                .carousel-inner
+                  .item.active
+                    %img{:src => "http://st.kp.yandex.net/images/film_big/505966.jpg"}
+                  .item
+                    %img{:src => "http://st.kp.yandex.net/images/film_big/505966.jpg"}
+                  .item
+                    %img{:src => "http://st.kp.yandex.net/images/film_big/505966.jpg"}
+
+                -#Slider arrows
+                %a.left.carousel-control{:role => "button", :href => "#myCar", "data-slide" => "prev"}
+                  .glyphicon.glyphicon-chevron-left
+
+                %a.right.carousel-control{:role => "button", :href => "#myCar", "data-slide" => "next"}
+                  .glyphicon.glyphicon-chevron-right
+        -#  INFO TOPS
+        .col-md-4.col-sm-4.col-xs-12#side-bar
+          #accordion.panel-group
+            .panel.panel-default
+              .panel-heading
+                %h4.panel-title
+                  %a{:href => "#collapse-1", "data-parent" => "#accordion", "data-toggle" => "collapse"}
+                    Top rated news
+              #collapse-1.panel-collapse.collapse.in
+                .panel-body
+                  %ul
+                    %li
+                      %h1 News title
+                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                    %li
+                      %h1 News title
+                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                    %li
+                      %h1 News title
+                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+            .panel.panel-default
+              .panel-heading
+                %h4.panel-title
+                  %a{:href => "#collapse-2", "data-parent" => "#accordion", "data-toggle" => "collapse"}
+                    Top rated comments
+              #collapse-2.panel-collapse.collapse
+                .panel-body
+                  %ul
+                    %li
+                      %h1 AMAZING COMMENT
+                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                    %li
+                      %h1 AMAZING COMMENT
+                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                    %li
+                      %h1 AMAZING COMMENT
+                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+            .panel.panel-default
+              .panel-heading
+                %h4.panel-title
+                  %a{:href => "#collapse-3", "data-parent" => "#accordion", "data-toggle" => "collapse"}
+                    Top rated reviews
+              #collapse-3.panel-collapse.collapse
+                .panel-body
+                  %ul
+                    %li
+                      %h1 AMAZING REVIEW
+                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                    %li
+                      %h1 AMAZING REVIEW
+                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                    %li
+                      %h1 AMAZING REVIEW
+                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+
+
+
+
+      %nav.center
+
+      .footer
+        Flumen © 2015
+        %br
+        Oleg Makarenko

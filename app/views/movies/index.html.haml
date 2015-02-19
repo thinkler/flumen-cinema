@@ -1,0 +1,54 @@
+%table.table.table-hover
+  %tr
+    %th Poster
+    %th Info
+  - @movies.each do |m|
+    %tr
+      %td
+        = image_tag(m.poster_url, size: "180x230")
+      %td
+        %h3
+          = m.name
+        %ul
+          %li
+            Box office:
+            = m.box_office
+          %li
+            Actors:
+            -#Add actores
+          %li
+            Genre:
+            -#Add genre
+          %li
+            Duration:
+          = link_to "View", movie_path(m), class: "btn btn-success"
+        - if current_user
+          - if current_user
+            %td
+              = link_to "DEL", m, method: :delete, class: "btn btn-danger"
+              = link_to "EDIT", edit_movie_path(m), class: "btn btn-info"
+
+  -#.thumbnail
+  -#
+  -#  .caption
+  -#    %h2
+  -#      = m.name
+  -#    %h2
+  -#      = m.box_office
+  -#    %p
+  -#      = m.desc
+  -#    %button.btn.btn-primary
+  -#      Comments
+  -#      .badge
+  -#        = m.comments.count
+  -#    %button.btn.btn-danger
+  -#      Rating
+  -#      .badge
+  -#        = m.rating
+  -#    -#    MAKE BTN GROUP
+  -#    - if current_user
+  -#      %button.btn.btn-info
+  -#        v
+  -#      %button.btn.btn-info
+  -#        ^
+
