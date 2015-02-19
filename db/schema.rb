@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217141311) do
+ActiveRecord::Schema.define(version: 20150219185604) do
 
   create_table "actors", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20150217141311) do
     t.string   "photo_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "movie_id"
+    t.text     "about"
+  end
+
+  create_table "actors_movies", force: :cascade do |t|
+    t.integer "actor_id"
+    t.integer "movie_id"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -49,6 +56,8 @@ ActiveRecord::Schema.define(version: 20150217141311) do
     t.integer  "rating",      default: 0
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "genre"
+    t.integer  "actor_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -59,6 +68,7 @@ ActiveRecord::Schema.define(version: 20150217141311) do
     t.integer  "movie_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "total_ball"
   end
 
   create_table "users", force: :cascade do |t|

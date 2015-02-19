@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   resources :actors
   resources :reviews
 
+  post 'actors/:id' => 'actors#add_movie'
+
+  delete 'actors/:id/delete_movie' => 'actors#delte_movie', as: :delete_movie
+
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

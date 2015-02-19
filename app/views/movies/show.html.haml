@@ -1,0 +1,20 @@
+%h1.center
+  = @movie.name
+
+.col-md-6
+  .thumbnail
+    = image_tag(@movie.poster_url, size: "380x500")
+
+.col-md-6
+  .thumbnail
+    %ul
+      %li
+        = @movie.genre
+      %li
+        = @movie.box_office
+    %p
+      = @movie.desc
+
+%br
+%br
+%br

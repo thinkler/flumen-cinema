@@ -1,0 +1,11 @@
+.container
+  .row
+    .col-md-4.col-md-offset-2.col-xs-12.col-sm-4.col-sm-offset-2
+      .jumbotron
+        %h1 Edit actor
+        = bootstrap_form_for @actor do |f|
+          = f.text_field :name
+          = f.text_field :age
+          = f.text_area :about
+          = f.text_field :photo_url
+          = f.submit "Update"

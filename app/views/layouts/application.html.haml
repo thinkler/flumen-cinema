@@ -20,7 +20,7 @@
       .collapse.navbar-collapse#drop-menu
         %ul.nav.navbar-nav
           %li
-            %a Actors
+            = link_to "Actors", actors_path
           %li.dropdown
             = link_to "Movies", movies_path
             -#%a.dropdown-toggle{"data-toggle" => "dropdown", "role" => "button", :url => "#{movies_path}"}
@@ -39,7 +39,7 @@
           %li
             = link_to "News", root_path
           %li
-            %a Reviews
+            = link_to "Reviews", reviews_path
         %ul.user-info.nav.navbar-nav.navbar-right
 
         %form.navbar-form.navbar-center{:role => "search"}
