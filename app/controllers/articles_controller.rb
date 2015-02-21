@@ -1,6 +1,11 @@
 class ArticlesController < ApplicationController
 
-  before_action :check_in, except: :main
+  # before_action :check_in, except: {:main, :show}
+
+  def show
+    @article = Article.find(params[:id])
+    @comment = Comment.new
+  end
 
   def new
     @article = Article.new

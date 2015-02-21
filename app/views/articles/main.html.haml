@@ -7,13 +7,10 @@
     = image_tag(a.img_url)
     .caption
       %h2
-        = a.title
+        = link_to "#{a.title}", article_path(a)
       %p
         = a.body
-      %button.btn.btn-primary
-        Comments
-        .badge
-          = a.comments.count
+      = link_to "#{a.comments.count} Comments", article_path(a), class: "btn btn-primary"
       %button.btn.btn-danger
         Rating
         .badge

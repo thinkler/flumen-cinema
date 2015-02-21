@@ -7,13 +7,37 @@
 
 .col-md-6
   .thumbnail
-    %ul
-      %li
-        = @movie.genre
-      %li
-        = @movie.box_office
     %p
+      %b
+        Genre:
+      = @movie.genre
+    %p
+      %b
+        Box office:
+      = @movie.box_office
+    %p
+      %b
+        Description:
       = @movie.desc
+
+- if current_user
+  - if current_user.admin?
+    .col-md-3
+      .thumbnail
+        = bootstrap_form_for @movie, :method => "post" do |a|
+          = a.collection_select :actor_id, Actor.order(:name), :id ,:name
+          = a.submit "Add", class: "btn btn-primary"
+.col-md-3
+  .thumbnail
+    %b
+      Actors:
+    - @actors.each do |a|
+      %p
+        = link_to "#{a.name}", movie_path(a)
+        - if current_user
+          - if current_user.admin?
+            = link_to "del", {:controller => "movies", :action => "delete_actor", :actor_id => a.id}, method: :delete
+
 
 %br
 %br

@@ -1,0 +1,42 @@
+- if current_user
+  - if current_user.admin?
+    = link_to "DEL", @article, method: :delete, class: "btn btn-danger"
+    = link_to "EDIT", edit_article_path(@article), class: "btn btn-info"
+.thumbnail
+  = image_tag(@article.img_url)
+  .caption
+    %h2
+      = @article.title
+    %p
+      = @article.body
+    %button.btn.btn-danger
+      Rating
+      .badge
+        = @article.rating
+    -#    MAKE BTN GROUP
+    - if current_user
+      %button.btn.btn-info
+        v
+      %button.btn.btn-info
+        ^
+    .post-data
+      = @article.created_at.strftime("%d %b. %Y")
+      = @article.created_at.strftime("%H:%M")
+
+- @article.comments.each do |c|
+  .thumbnail
+    %b
+      = User.find(c.user_id).email
+    %p
+      = c.body
+    - if current_user
+      - if (current_user.id == c.user_id) || (current_user.admin?)
+        = link_to "del", c, method: :delete
+
+
+- if current_user
+  = bootstrap_form_for @comment do |f|
+    = f.text_area :body
+    = f.hidden_field :article_id, :value => @article.id
+    = f.hidden_field :user_id, :value => current_user.id
+    = f.submit

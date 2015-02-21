@@ -63,7 +63,7 @@
         .col-md-4.col-sm-4.col-xs-12
           .panel.panel-default
             .panel-heading.center User info
-            .panel-body
+            .panel-body.cute-body
               - if user_signed_in?
                 - if current_user.admin?
                   = render partial: "articles/admin_panel"

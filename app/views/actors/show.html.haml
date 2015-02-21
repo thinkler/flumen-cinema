@@ -1,3 +1,9 @@
+- if current_user
+  - if current_user.admin?
+    %td
+      = link_to "DEL", @actor, method: :delete, class: "btn btn-danger"
+      = link_to "EDIT", edit_actor_path(@actor), class: "btn btn-info"
+
 %h1.center
   = @actor.name
   (
@@ -12,20 +18,20 @@
     %h3.center About
     %p
       = @actor.about
+- if current_user
+  - if current_user.admin?
+    .col-md-3
+      .thumbnail
+        = bootstrap_form_for @actor, :method => "post" do |a|
+          = a.collection_select :movie_id, Movie.order(:name), :id ,:name
+          = a.submit "Add", class: "btn btn-primary"
 .col-md-3
   .thumbnail
-    = bootstrap_form_for @actor, :method => "post" do |a|
-      = a.collection_select :movie_id, Movie.order(:name), :id ,:name
-      = a.submit "Add", class: "btn btn-primary"
-.col-md-3
-  .thumbnail
+    %b
+      Played in movies:
     - @movies.each do |m|
       %p
-        = m.name
-        = link_to "del", :controller => :actors, :action => :delete_movie, id: m.id
-
-
-= params
-%br
-%br
-%br
+        = link_to "#{m.name}", movie_path(m)
+        - if current_user
+          - if current_user.admin?
+            = link_to "del", {:controller => "actors", :action => "delete_movie", :movie_id => m.id}, method: :delete

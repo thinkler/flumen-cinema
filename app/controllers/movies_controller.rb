@@ -17,6 +17,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @actors = @movie.actors
   end
 
   def edit
@@ -36,7 +37,21 @@ class MoviesController < ApplicationController
       redirect_to movies_url
     end
   end
-  
+
+  def add_actor
+    actor_id = params[:movie][:actor_id]
+    @movie = Movie.find(params[:id])
+    @movie.actors << Actor.find(actor_id)
+    redirect_to movie_path(@movie)
+  end
+
+  def delete_actor
+    actor_id = params[:actor_id]
+    @movie = Movie.find(params[:id])
+    @movie.actors.delete(actor_id)
+    redirect_to movie_path(@movie)
+  end
+
   private
 
   def movie_params

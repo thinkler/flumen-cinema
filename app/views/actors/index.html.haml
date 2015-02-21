@@ -1,43 +1,19 @@
 .container
   .row
-    - @actors.each do |a|
-      .col-md-2
-        - if current_user
+    .col-md-8
+      - @actors.each do |a|
+        .col-md-3
           - if current_user
-            %td
-              = link_to "DEL", a, method: :delete, class: "btn btn-danger"
-              = link_to "EDIT", edit_actor_path(a), class: "btn btn-info"
-        .thumbnail
-          = image_tag(a.photo_url, size: "180x200")
-          %h3
-            = a.name
-          %p
+            - if current_user
+              %td
+                = link_to "DEL", a, method: :delete, class: "btn btn-danger"
+                = link_to "EDIT", edit_actor_path(a), class: "btn btn-info"
+          .thumbnail
+            = image_tag(a.photo_url, size: "180x200")
             %h3
-              %b Age:
-              = a.age
-          = link_to "View", actor_path(a), class: "btn btn-success"
-
-  -#.thumbnail
-  -#
-  -#  .caption
-  -#    %h2
-  -#      = m.name
-  -#    %h2
-  -#      = m.box_office
-  -#    %p
-  -#      = m.desc
-  -#    %button.btn.btn-primary
-  -#      Comments
-  -#      .badge
-  -#        = m.comments.count
-  -#    %button.btn.btn-danger
-  -#      Rating
-  -#      .badge
-  -#        = m.rating
-  -#    -#    MAKE BTN GROUP
-  -#    - if current_user
-  -#      %button.btn.btn-info
-  -#        v
-  -#      %button.btn.btn-info
-  -#        ^
-
+              = a.name
+            %p
+              %h3
+                %b Age:
+                = a.age
+            = link_to "View", actor_path(a), class: "btn btn-success"
