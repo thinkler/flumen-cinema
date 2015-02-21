@@ -20,6 +20,15 @@ Rails.application.routes.draw do
 
   delete 'movies/delete_actor/:id' => 'movies#delete_actor', as: :delete_actor
 
+  post 'articles/up_vote/:id' => 'articles#up_vote'
+  post 'articles/down_vote' => 'articles#down_vote'
+
+  post 'movies/up_vote' => 'movies#up_vote'
+  post 'movies/down_vote' => 'movies#down_vote'
+
+  post 'reviews/up_vote' => 'reviews#up_vote'
+  post 'reviews/down_vote' => 'reviews#down_vote'
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

@@ -17,10 +17,8 @@
           = a.rating
       -#    MAKE BTN GROUP
       - if current_user
-        %button.btn.btn-info
-          v
-        %button.btn.btn-info
-          ^
+        = link_to "+", {:controller => "articles", :action => "up_vote", :id => a.id}, method: :post, class: "btn btn-info"
+        = link_to "-", {:controller => "articles", :action => "down_vote", :id => a.id}, method: :post, class: "btn btn-info"
       .post-data
         = a.created_at.strftime("%d %b. %Y")
         = a.created_at.strftime("%H:%M")
