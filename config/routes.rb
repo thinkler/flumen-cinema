@@ -23,8 +23,8 @@ Rails.application.routes.draw do
   post 'articles/up_vote/:id' => 'articles#up_vote'
   post 'articles/down_vote/:id' => 'articles#down_vote'
 
-  post 'movies/up_vote' => 'movies#up_vote'
-  post 'movies/down_vote' => 'movies#down_vote'
+  post 'movies/up_vote/:id' => 'movies#up_vote'
+  post 'movies/down_vote/:id' => 'movies#down_vote'
 
   post 'reviews/up_vote' => 'reviews#up_vote'
   post 'reviews/down_vote' => 'reviews#down_vote'

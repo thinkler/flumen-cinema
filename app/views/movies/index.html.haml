@@ -27,4 +27,10 @@
                 %p
                   Duration:
                 = link_to "View", movie_path(m), class: "btn btn-success"
-
+                %p
+                  Rating:
+                  = m.rating
+                - if current_user
+                  %p
+                    = link_to "+", {:controller => "movies", :action => "up_vote", :id => m.id}, method: :post, class: "btn btn-info"
+                    = link_to "-", {:controller => "movies", :action => "down_vote", :id => m.id}, method: :post, class: "btn btn-info"

@@ -1,0 +1,30 @@
+.container
+  .row
+    .col-md-8
+      - @reviews.each do |r|
+        .thumbnail
+          - if current_user
+            - if current_user.admin? || r.user_id == current_user.id
+              = link_to "DEL", r, method: :delete, class: "btn btn-danger"
+              = link_to "EDIT", edit_review_path(r), class: "btn btn-info"
+          %h2.center
+            = link_to "#{r.title}", review_path(r)
+          %p
+            To movie:
+            = r.movie.name
+          %p
+            Body:
+            = r.body
+          %p
+            Total ball:
+            = r.total_ball
+          %p
+            Rating:
+            = r.rating
+          %p
+            By:
+            = r.user.email
+          - if current_user
+            %p
+              = link_to "+", {:controller => "reviews", :action => "up_vote", :id => r.id}, method: :post, class: "btn btn-info"
+              = link_to "-", {:controller => "reviews", :action => "down_vote", :id => r.id}, method: :post, class: "btn btn-info"

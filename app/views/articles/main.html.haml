@@ -8,7 +8,6 @@
     .caption
       %h2
         = link_to "#{a.title}", article_path(a)
-        = a.id
       %p
         = a.body
       = link_to "#{a.comments.count} Comments", article_path(a), class: "btn btn-primary"

@@ -1,0 +1,13 @@
+.container
+  .row
+    .col-md-5.col-md-offset-3
+      .jumbotron
+
+        %h1 Edit review
+        = bootstrap_form_for @review do |f|
+          = f.text_field :title
+          = f.text_area :body
+          = f.collection_select :movie_id, Movie.order(:name), :id ,:name
+          = f.range_field(:total_ball, in: 1..10)
+          = f.hidden_field :user_id, :value => current_user.id
+          = f.submit "Update"

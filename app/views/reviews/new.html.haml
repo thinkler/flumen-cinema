@@ -1,0 +1,13 @@
+.container
+  .row
+    .col-md-4.col-md-offset-2.col-xs-12.col-sm-4.col-sm-offset-2
+      .jumbotron
+
+        %h1 New review
+        = bootstrap_form_for @review do |f|
+          = f.text_field :title
+          = f.text_area :body
+          = f.collection_select :movie_id, Movie.order(:name), :id ,:name
+          = f.range_field(:total_ball, in: 1..10)
+          = f.hidden_field :user_id, :value => current_user.id
+          = f.submit "Create", method: :get
