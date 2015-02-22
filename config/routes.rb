@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   delete 'movies/delete_actor/:id' => 'movies#delete_actor', as: :delete_actor
 
   post 'articles/up_vote/:id' => 'articles#up_vote'
-  post 'articles/down_vote' => 'articles#down_vote'
+  post 'articles/down_vote/:id' => 'articles#down_vote'
 
   post 'movies/up_vote' => 'movies#up_vote'
   post 'movies/down_vote' => 'movies#down_vote'
