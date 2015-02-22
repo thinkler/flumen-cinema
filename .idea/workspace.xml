@@ -62,11 +62,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.haml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html.haml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/reviews/index.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.333334" vertical-offset="0" max-vertical-offset="648">
-              <caret line="29" column="53" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.3369735" vertical-offset="0" max-vertical-offset="648">
+              <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -122,10 +122,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reviews_controller.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="reviews_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/reviews_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16467066" vertical-offset="790" max-vertical-offset="1998">
+            <state vertical-scroll-proportion="0.0" vertical-offset="790" max-vertical-offset="1998">
               <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
               <folding />
             </state>
@@ -978,14 +978,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/reviews/index.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.333334" vertical-offset="0" max-vertical-offset="648">
-          <caret line="29" column="53" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/reviews/new.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.666667" vertical-offset="0" max-vertical-offset="342">
@@ -1028,8 +1020,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/reviews_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16467066" vertical-offset="790" max-vertical-offset="1998">
+        <state vertical-scroll-proportion="0.0" vertical-offset="790" max-vertical-offset="1998">
           <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/reviews/index.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3369735" vertical-offset="0" max-vertical-offset="648">
+          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
           <folding />
         </state>
       </provider>
