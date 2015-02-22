@@ -5,6 +5,7 @@ gem 'bootstrap-sass', '~> 3.3.3'
 gem "font-awesome-rails"
 gem 'devise'
 gem 'bootstrap_form'
+gem 'hirb'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

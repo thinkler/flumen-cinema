@@ -7,3 +7,22 @@
       = @review.movie.name
   %p
     = @review.body
+
+
+- @review.comments.each do |c|
+  .thumbnail
+    %b
+      = User.find(c.user_id).email
+    %p
+      = c.body
+    - if current_user
+      - if (current_user.id == c.user_id) || (current_user.admin?)
+        = link_to "del", c, method: :delete
+
+
+- if current_user
+  = bootstrap_form_for @comment do |f|
+    = f.text_area :body
+    = f.hidden_field :review_id, :value => @review.id
+    = f.hidden_field :user_id, :value => current_user.id
+    = f.submit
