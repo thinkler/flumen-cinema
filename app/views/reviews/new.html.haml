@@ -7,7 +7,10 @@
         = bootstrap_form_for @review do |f|
           = f.text_field :title
           = f.text_area :body
-          = f.collection_select :movie_id, Movie.order(:name), :id ,:name
+          - if !params[:movie_id]
+            = f.collection_select :movie_id, Movie.order(:name), :id ,:name
+          - else
+            = f.hidden_field :movie_id, :value => params[:movie_id]  
           = f.range_field(:total_ball, in: 1..10)
           = f.hidden_field :user_id, :value => current_user.id
           = f.submit "Create", method: :get

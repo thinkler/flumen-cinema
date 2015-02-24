@@ -3,13 +3,17 @@ class ArticlesController < ApplicationController
   before_action :check_in, except: [:up_vote, :down_vote, :main, :show]
   before_action :rating_check, only: [:up_vote, :down_vote]
 
+  add_breadcrumb "Home", :root_path
+
   def show
     @article = Article.find(params[:id])
     @comment = Comment.new
+    add_breadcrumb "#{@article.title}"
   end
 
   def new
     @article = Article.new
+    add_breadcrumb "New article"
   end
 
   def create
@@ -30,10 +34,12 @@ class ArticlesController < ApplicationController
 
   def main
     @articles = Article.all
+    @articles = @articles.paginate(:page => params[:page], :per_page => 3)
   end
 
   def edit
     @article = Article.find(params[:id])
+    add_breadcrumb "Edit article"
   end
 
   def update

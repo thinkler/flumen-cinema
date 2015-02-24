@@ -1,5 +1,8 @@
 class ActorsController < ApplicationController
 
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Actors", :actors_path
+
   def index
     @actors = Actor.all
   end
@@ -7,10 +10,12 @@ class ActorsController < ApplicationController
   def show
     @actor = Actor.find(params[:id])
     @movies = @actor.movies
+    add_breadcrumb "#{@actor.name}"
   end
 
   def new
     @actor = Actor.new
+    add_breadcrumb "New actor"
   end
 
   def create
@@ -24,6 +29,7 @@ class ActorsController < ApplicationController
 
   def edit
     @actor = Actor.find(params[:id])
+    add_breadcrumb "Edit actor"
   end
 
   def update

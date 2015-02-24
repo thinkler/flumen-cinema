@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   post 'reviews/up_vote' => 'reviews#up_vote'
   post 'reviews/down_vote' => 'reviews#down_vote'
 
+  get 'search' => 'search#search', as: :search
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

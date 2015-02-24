@@ -37,7 +37,9 @@
         - if current_user
           - if current_user.admin?
             = link_to "del", {:controller => "movies", :action => "delete_actor", :actor_id => a.id}, method: :delete
-
+.col-md-3
+  - if current_user
+    = link_to "Add review", {:controller => "reviews", :action => "new", :movie_id => @movie.id}
 
 %br
 %br

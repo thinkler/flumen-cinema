@@ -1,6 +1,8 @@
 class MoviesController < ApplicationController
 
   before_action :rating_check, only: [:up_vote, :down_vote]
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Movies", :movies_path
 
   def index
     @movies = Movie.all
@@ -8,6 +10,7 @@ class MoviesController < ApplicationController
 
   def new
     @movie = Movie.new
+    add_breadcrumb "New movie"
   end
 
   def create
@@ -20,10 +23,12 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @actors = @movie.actors
+    add_breadcrumb "#{@movie.name}"
   end
 
   def edit
     @movie = Movie.find(params[:id])
+    add_breadcrumb "Edit movie"
   end
 
   def update

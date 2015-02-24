@@ -6,6 +6,9 @@ gem "font-awesome-rails"
 gem 'devise'
 gem 'bootstrap_form'
 gem 'hirb'
+gem 'will_paginate'
+gem 'ransack'
+gem "breadcrumbs_on_rails"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

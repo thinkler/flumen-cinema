@@ -1,6 +1,8 @@
 class ReviewsController < ApplicationController
 
   before_action :rating_check, only: [:up_vote, :down_vote]
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Reviews", :reviews_path
 
   def index
     @reviews = Review.all
@@ -9,10 +11,12 @@ class ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @comment = Comment.new
+    add_breadcrumb "#{@review.title}"
   end
 
   def new
     @review = Review.new
+    add_breadcrumb "New review"
   end
 
   def create
@@ -30,6 +34,7 @@ class ReviewsController < ApplicationController
 
   def edit
     @review = Review.find(params[:id])
+    add_breadcrumb "Edit review"
   end
 
   def update

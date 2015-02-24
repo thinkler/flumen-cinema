@@ -1,0 +1,88 @@
+
+- if !@articles.empty?
+  %h1 
+    Articles
+  %table.table.table-hover
+    %tr
+      %th
+        Title
+      %th
+        Picture
+      %th
+        Rating
+      %th
+        Comments      
+    - @articles.each do |a|
+      %tr
+        %td
+          = link_to "#{a.title}", article_path(a)
+        %td
+          = image_tag(a.img_url, size: "50x50") 
+        %td
+          = a.rating        
+        %td
+          = a.comments.count  
+
+- if !@movies.empty?
+  %h1 
+    Movies
+  %table.table.table-hover
+    %tr
+      %th
+        Name
+      %th
+        Picture
+      %th
+        Rating
+      %th
+        Review      
+    - @movies.each do |m|
+      %tr
+        %td
+          = link_to "#{m.name}", movie_path(m)
+        %td
+          = image_tag(m.poster_url, size: "50x50") 
+        %td
+          = m.rating        
+        %td
+          = m.reviews.count          
+
+- if !@reviews.empty?
+  %h1 
+    Reviews
+  %table.table.table-hover
+    %tr
+      %th
+        Title
+      %th  
+        Rating
+      %th
+        Comments      
+    - @reviews.each do |r|
+      %tr
+        %td
+          = link_to "#{r.title}", review_path(r)
+        %td
+          = r.rating        
+        %td
+          = r.comments.count  
+
+- if !@actors.empty?
+  %h1 
+    Actors
+  %table.table.table-hover
+    %tr
+      %th
+        Name
+      %th
+        Photo
+      %th
+        Age
+    - @actors.each do |a|
+      %tr
+        %td
+          = link_to "#{a.name}", actor_path(a)
+        %td
+          = image_tag(a.photo_url, size: "50x50") 
+        %td
+          = a.age  
