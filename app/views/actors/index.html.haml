@@ -14,10 +14,10 @@
                 = link_to "EDIT", edit_actor_path(a), class: "btn btn-info"
           .thumbnail
             = image_tag(a.photo_url, size: "180x200")
-            %h3
+            %h4
               = a.name
             %p
-              %h3
+              %h4
                 %b Age:
                 = a.age
             = link_to "View", actor_path(a), class: "btn btn-success"

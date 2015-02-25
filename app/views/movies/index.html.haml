@@ -23,8 +23,9 @@
                   = m.box_office
                 %p
                   Actors:
-                  - m.actors.each do |a|
-                    = link_to "#{a.name}", actor_path(a)
+                  - m.actors.limit(3).each do |a|
+                    = link_to "#{a.name}", actor_path(a)  
+                  = link_to "...", movie_path(m)    
                 %p
                   Genre:
                   = m.genre
@@ -38,6 +39,7 @@
                   %p
                     = link_to "+", {:controller => "movies", :action => "up_vote", :id => m.id}, method: :post, class: "btn btn-info"
                     = link_to "-", {:controller => "movies", :action => "down_vote", :id => m.id}, method: :post, class: "btn btn-info"
+                    = link_to "Add review", new_review_path(m.id), class: "btn btn-info"  
 
 .center
   .panel.panel-default

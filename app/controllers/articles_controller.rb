@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
   end
 
   def main
-    @articles = Article.all
+    @articles = Article.order('id DESC')
     @articles = @articles.paginate(:page => params[:page], :per_page => 3)
   end
 

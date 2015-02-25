@@ -27,7 +27,8 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     total_ball = @movie.calculate_ball
     @movie.total_ball = total_ball
-    @actors = @movie.actors
+    @actors = @movie.actors.limit(5)
+    @reviews = @movie.reviews.limit(5)
     add_breadcrumb "#{@movie.name}"
   end
 

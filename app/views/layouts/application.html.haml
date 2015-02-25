@@ -112,28 +112,24 @@
               .panel-heading
                 %h4.panel-title
                   %a{:href => "#collapse-1", "data-parent" => "#accordion", "data-toggle" => "collapse"}
-                    Top rated news
+                    Top rated movie
               #collapse-1.panel-collapse.collapse.in
                 .panel-body
                   %ul
-                    %li
-                      %h1 News title
-                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
-                    %li
-                      %h1 News title
-                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
-                    %li
-                      %h1 News title
-                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                    - Movie.order('rating DESC').limit(3).each do |m|
+                      %li
+                        %h1 
+                          = m.name
+                        %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
             .panel.panel-default
               .panel-heading
                 %h4.panel-title
                   %a{:href => "#collapse-2", "data-parent" => "#accordion", "data-toggle" => "collapse"}
-                    Top rated comments
+                    Top rated article
               #collapse-2.panel-collapse.collapse
                 .panel-body
                   %ul
-                    - Article.last(3).each do |a|
+                    - Article.order('rating DESC').limit(3).each do |a|
                       %li
                         %h1 
                           = a.title
@@ -142,19 +138,15 @@
               .panel-heading
                 %h4.panel-title
                   %a{:href => "#collapse-3", "data-parent" => "#accordion", "data-toggle" => "collapse"}
-                    Top rated reviews
+                    Top rated reviews 
               #collapse-3.panel-collapse.collapse
                 .panel-body
                   %ul
-                    %li
-                      %h1 AMAZING REVIEW
-                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
-                    %li
-                      %h1 AMAZING REVIEW
-                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
-                    %li
-                      %h1 AMAZING REVIEW
-                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                    - Review.order('rating DESC').limit(3).each do |r|
+                      %li
+                        %h1 
+                          = r.title
+                        %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
 
 
 

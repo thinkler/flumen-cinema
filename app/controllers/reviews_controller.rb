@@ -4,7 +4,6 @@ class ReviewsController < ApplicationController
   add_breadcrumb "Home", :root_path
   add_breadcrumb "Reviews", :reviews_path
 
-  before_action :if_admin, only: [:new, :edit, :destroy]
 
   def index
     @reviews = Review.all

@@ -14,14 +14,14 @@
     %p
       %b
         Box office:
-      = @movie.box_office
+      = "#{@movie.box_office}" + "$"
     %p
       %b
         Description:
       = @movie.desc
     %p
       %b
-        Total ball:
+        Users ball:
       = @movie.total_ball    
 - if current_user
   - if current_user.admin?
@@ -35,15 +35,21 @@
     %b
       Actors:
     - @actors.each do |a|
-      %p
+      %p.list
         = link_to "#{a.name}", actor_path(a)
         - if current_user
           - if current_user.admin?
             = link_to "del", {:controller => "movies", :action => "delete_actor", :actor_id => a.id}, method: :delete
+    = link_to "..."    
+- if @reviews            
+  .col-md-3
+    .thumbnail
+      %b
+        Reviews:
+      - @reviews.each do |r|
+        %p.list
+          = link_to "#{r.title}", actor_path(r)
+        = link_to "..."              
 .col-md-3
   - if current_user
     = link_to "Add review", {:controller => "reviews", :action => "new", :movie_id => @movie.id}
-
-%br
-%br
-%br

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :reviews
   resources :comments
 
-  post 'actors/:id' => 'actors#add_movie'
+  post 'actors/:id' => 'actors#add_movie', as: :add_movie
 
   delete 'actors/delete_movie/:id' => 'actors#delete_movie', as: :delete_movie
 
@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   post 'reviews/down_vote' => 'reviews#down_vote'
 
   get 'search' => 'search#search', as: :search
+
+  get 'movie_list' => 'actors#movie_select_list', as: :movie_search_list
+
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

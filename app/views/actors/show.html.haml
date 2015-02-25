@@ -22,9 +22,10 @@
   - if current_user.admin?
     .col-md-3
       .thumbnail
-        = bootstrap_form_for @actor, :method => "post" do |a|
-          = a.collection_select :movie_id, Movie.order(:name), :id ,:name
-          = a.submit "Add", class: "btn btn-primary"
+        = form_tag movie_search_list_path, :method => "get" do
+          = text_field_tag :movie_name, 'Movie name', size: 15
+          = hidden_field_tag :actor_id, @actor.id
+          = submit_tag "Add", class: "btn btn-primary"
 .col-md-3
   .thumbnail
     %b

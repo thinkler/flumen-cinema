@@ -6,7 +6,7 @@ class ActorsController < ApplicationController
   before_action :if_admin, only: [:new, :edit, :destroy]
 
   def index
-    @actors = Actor.all
+    @actors = Actor.order('name')
     @actors = @actors.paginate(:page => params[:page], :per_page => 16)
   end
 
@@ -52,18 +52,9 @@ class ActorsController < ApplicationController
   end
 
   def add_movie
-    movie_id = params[:actor][:movie_id]
-    @actor = Actor.find(params[:id])
-
+    movie_id = params[:id]
+    @actor = Actor.find(params[:actor_id])
     @mov = movie_id
-
-    #
-    # @actor.movies.each do |m|
-    #   if m.id == movie_id
-    #     redirect_to actor_path(@actor)
-    #   end
-    # end
-
     @actor.movies << Movie.find(movie_id)
     redirect_to actor_path(@actor)
   end
@@ -73,6 +64,11 @@ class ActorsController < ApplicationController
     @actor = Actor.find(params[:id])
     @actor.movies.delete(movie_id)
     redirect_to actor_path(params[:id])
+  end
+
+  def movie_select_list
+    @movies = Movie.ransack(name_cont: params[:movie_name]).result
+    @movies = @movies.limit(20)
   end
 
 

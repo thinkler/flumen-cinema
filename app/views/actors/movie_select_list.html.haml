@@ -1,0 +1,28 @@
+- if !@movies.empty?
+  %h1 
+    Movies
+  %table.table.table-hover
+    %tr
+      %th
+        Name
+      %th
+        Picture
+      %th
+        Rating
+      %th
+        Reviews    
+      %th    
+    - @movies.each do |m|
+      %tr
+        %td
+          = link_to "#{m.name}", movie_path(m)
+        %td
+          = image_tag(m.poster_url, size: "50x50") 
+        %td
+          = m.rating        
+        %td
+          = m.reviews.count     
+        %td
+          = link_to "Select", {:controller => "actors", :action => "add_movie", :id => m.id, :actor_id => params[:actor_id]}, method: :post
+
+= params          
