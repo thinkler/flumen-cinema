@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   get 'movie_list/:id' => 'actors#movie_list', as: :movie_list
   get 'actor_list/:id' => 'movies#actor_list', as: :actor_list
   get 'review_list/:id' => 'movies#review_list', as: :review_list
+
+  get '/:anything', to: "application#error_404", constraints: { anything: /.*/ }
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

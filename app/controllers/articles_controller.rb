@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 
-  before_action :check_in, except: [:up_vote, :down_vote, :main, :show]
+  before_action :check_in, except: [:destroy, :create, :up_vote, :down_vote, :main, :show]
   before_action :rating_check, only: [:up_vote, :down_vote]
 
   add_breadcrumb "Home", :root_path
