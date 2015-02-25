@@ -1,3 +1,7 @@
+.center
+  .panel.panel-default
+    = will_paginate @movies
+
 .container
   .row
     .col-md-8
@@ -34,3 +38,7 @@
                   %p
                     = link_to "+", {:controller => "movies", :action => "up_vote", :id => m.id}, method: :post, class: "btn btn-info"
                     = link_to "-", {:controller => "movies", :action => "down_vote", :id => m.id}, method: :post, class: "btn btn-info"
+
+.center
+  .panel.panel-default
+    = will_paginate @movies

@@ -1,3 +1,7 @@
+.center
+  .panel.panel-default
+    = will_paginate @reviews
+
 .container
   .row
     .col-md-8
@@ -10,21 +14,25 @@
           %h2.center
             = link_to "#{r.title}", review_path(r)
           %p
-            To movie:
-            = r.movie.name
+            %b To movie:
+            = link_to "#{r.movie.name}", movie_path(r.movie)
           %p
-            Body:
+            %b Body:
             = r.body
           %p
-            Total ball:
+            %b Total ball:
             = r.total_ball
           %p
-            Rating:
+            %b Rating:
             = r.rating
           %p
-            By:
+            %b By:
             = r.user.email
           - if current_user
             %p
               = link_to "+", {:controller => "reviews", :action => "up_vote", :id => r.id}, method: :post, class: "btn btn-info"
               = link_to "-", {:controller => "reviews", :action => "down_vote", :id => r.id}, method: :post, class: "btn btn-info"
+
+.center
+  .panel.panel-default
+    = will_paginate @reviews

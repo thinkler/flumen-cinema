@@ -3,8 +3,11 @@ class ActorsController < ApplicationController
   add_breadcrumb "Home", :root_path
   add_breadcrumb "Actors", :actors_path
 
+  before_action :if_admin, only: [:new, :edit, :destroy]
+
   def index
     @actors = Actor.all
+    @actors = @actors.paginate(:page => params[:page], :per_page => 16)
   end
 
   def show
@@ -77,6 +80,16 @@ class ActorsController < ApplicationController
 
   def actors_params
     params.require(:actor).permit(:name, :age, :photo_url, :about)
+  end
+
+  def if_admin
+    if current_user
+      if !current_user.admin?
+        redirect_to root_path
+      end  
+    else
+      redirect_to root_path
+    end     
   end
 
 

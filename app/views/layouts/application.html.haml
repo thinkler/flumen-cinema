@@ -43,7 +43,7 @@
         %ul.user-info.nav.navbar-nav.navbar-right
         .center.search
           = form_tag search_path, method: :get do
-            = text_field_tag :search, class: "form-control", id: "inputHelpBlock"
+            = text_field_tag :search
             = submit_tag "Search", class: "btn btn-default"
 
               
@@ -93,11 +93,11 @@
                 -#Slides
                 .carousel-inner
                   .item.active
-                    %img{:src => "http://st.kp.yandex.net/images/film_big/505966.jpg"}
+                    = image_tag(Movie.first.poster_url)
                   .item
-                    %img{:src => "http://st.kp.yandex.net/images/film_big/505966.jpg"}
+                    = image_tag(Movie.find(7).poster_url)
                   .item
-                    %img{:src => "http://st.kp.yandex.net/images/film_big/505966.jpg"}
+                    = image_tag(Movie.last.poster_url)
 
                 -#Slider arrows
                 %a.left.carousel-control{:role => "button", :href => "#myCar", "data-slide" => "prev"}
@@ -133,15 +133,11 @@
               #collapse-2.panel-collapse.collapse
                 .panel-body
                   %ul
-                    %li
-                      %h1 AMAZING COMMENT
-                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
-                    %li
-                      %h1 AMAZING COMMENT
-                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
-                    %li
-                      %h1 AMAZING COMMENT
-                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                    - Article.last(3).each do |a|
+                      %li
+                        %h1 
+                          = a.title
+                        %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
             .panel.panel-default
               .panel-heading
                 %h4.panel-title

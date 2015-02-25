@@ -19,7 +19,10 @@
       %b
         Description:
       = @movie.desc
-
+    %p
+      %b
+        Total ball:
+      = @movie.total_ball    
 - if current_user
   - if current_user.admin?
     .col-md-3
@@ -33,7 +36,7 @@
       Actors:
     - @actors.each do |a|
       %p
-        = link_to "#{a.name}", movie_path(a)
+        = link_to "#{a.name}", actor_path(a)
         - if current_user
           - if current_user.admin?
             = link_to "del", {:controller => "movies", :action => "delete_actor", :actor_id => a.id}, method: :delete

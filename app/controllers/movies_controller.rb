@@ -4,8 +4,11 @@ class MoviesController < ApplicationController
   add_breadcrumb "Home", :root_path
   add_breadcrumb "Movies", :movies_path
 
+  before_action :if_admin, only: [:new, :edit, :destroy]
+
   def index
     @movies = Movie.all
+    @movies = @movies.paginate(:page => params[:page], :per_page => 8)
   end
 
   def new
@@ -22,6 +25,8 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    total_ball = @movie.calculate_ball
+    @movie.total_ball = total_ball
     @actors = @movie.actors
     add_breadcrumb "#{@movie.name}"
   end
@@ -113,6 +118,16 @@ class MoviesController < ApplicationController
       movie.rating -= 1
     end
     movie.save
+  end
+
+  def if_admin
+    if current_user
+      if !current_user.admin?
+        redirect_to root_path
+      end  
+    else
+      redirect_to root_path
+    end     
   end
 
 end

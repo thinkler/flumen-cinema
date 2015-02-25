@@ -1,3 +1,7 @@
+.center
+  .panel.panel-default
+    = will_paginate @actrors
+
 .container
   .row
     .col-md-8
@@ -17,3 +21,7 @@
                 %b Age:
                 = a.age
             = link_to "View", actor_path(a), class: "btn btn-success"
+
+.center
+  .panel.panel-default
+    = will_paginate @actrors

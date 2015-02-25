@@ -1,10 +1,10 @@
 .thumbnail
   .center
-    %h1
+    %h3
       = @review.title
     to
-    %h1
-      = @review.movie.name
+    %h3
+      = link_to "#{@review.movie.name}", movie_path(@review.movie)
   %p
     = @review.body
 

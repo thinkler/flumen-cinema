@@ -4,8 +4,11 @@ class ReviewsController < ApplicationController
   add_breadcrumb "Home", :root_path
   add_breadcrumb "Reviews", :reviews_path
 
+  before_action :if_admin, only: [:new, :edit, :destroy]
+
   def index
     @reviews = Review.all
+    @reviews = @reviews.paginate(:page => params[:page], :per_page => 4)
   end
 
   def show
@@ -106,6 +109,16 @@ class ReviewsController < ApplicationController
     else
       @rating = current_user.ratings.find_by(post_id: id)
     end
+  end
+
+  def if_admin
+    if current_user
+      if !current_user.admin?
+        redirect_to root_path
+      end  
+    else
+      redirect_to root_path
+    end     
   end
 
 end
