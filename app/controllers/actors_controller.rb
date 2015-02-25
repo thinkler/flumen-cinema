@@ -7,6 +7,11 @@ class ActorsController < ApplicationController
 
   def index
     @actors = Actor.order('name')
+    @q = @actors.ransack(params[:q])
+    @q.build_condition
+    if params[:q]
+      @actors = @q.result
+    end  
     @actors = @actors.paginate(:page => params[:page], :per_page => 16)
   end
 
@@ -24,8 +29,10 @@ class ActorsController < ApplicationController
   def create
     @actor = Actor.new(actors_params)
     if @actor.save
+      flash[:success] = "Actor created"
       redirect_to actors_url
     else
+      flash[:error] = "Input error"
       render "new"
     end
   end
@@ -40,7 +47,8 @@ class ActorsController < ApplicationController
     if @actor.update(actors_params)
       redirect_to actor_path(@actor)
     else
-      rende "edit"
+      flash[:error] = "Input error"
+      render "edit"
     end
   end
 
@@ -71,6 +79,10 @@ class ActorsController < ApplicationController
     @movies = @movies.limit(20)
   end
 
+  def movie_list
+    @movies = Actor.find(params[:id]).movies
+    @movies = @movies.paginate(:page => params[:page], :per_page => 15)
+  end
 
   private
 

@@ -58,6 +58,13 @@
         .col-md-8.col-sm-8.col-xs-12#content
           .breadcrumb
             = render_breadcrumbs
+          -if flash[:success] 
+            .alert.alert-success    
+              = flash[:success]
+          -if flash[:error] 
+            .alert.alert-warning    
+              = flash[:error]    
+            
           = yield
 
         -#USER PANEL
@@ -76,6 +83,7 @@
                   = link_to "Sign in", new_user_session_path
                 %li
                   = link_to "Sign up", new_user_registration_path
+            
         -#  POSTERS BLOCK
         .col-md-4.col-sm-4.col-xs-12#side-bar
           .panel.panel-info
@@ -89,15 +97,16 @@
                   %li.active{"data-target" => "#myCar", "data-slide-to" => "0"}
                   %li{"data-target" => "#myCar", "data-slide-to" => "1"}
                   %li{"data-target" => "#myCar", "data-slide-to" => "2"}
+                  %li{"data-target" => "#myCar", "data-slide-to" => "3"}
 
                 -#Slides
-                .carousel-inner
-                  .item.active
-                    = image_tag(Movie.first.poster_url)
-                  .item
-                    = image_tag(Movie.find(7).poster_url)
-                  .item
-                    = image_tag(Movie.last.poster_url)
+                - if Movie.first
+                  .carousel-inner
+                    .item.active
+                      = image_tag(Movie.first.poster_url)
+                    - Movie.last(3).each do |m|
+                      .item
+                        = image_tag(m.poster_url)
 
                 -#Slider arrows
                 %a.left.carousel-control{:role => "button", :href => "#myCar", "data-slide" => "prev"}

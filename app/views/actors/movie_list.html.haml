@@ -1,0 +1,28 @@
+.center
+  .panel.panel-default
+    = will_paginate @movies
+
+- if !@movies.empty?
+  %h1 
+    Movies
+  %table.table.table-hover
+    %tr
+      %th
+        Name
+      %th
+        Picture
+      %th
+        Rating
+      %th
+        Reviews    
+      %th    
+    - @movies.each do |m|
+      %tr
+        %td
+          = link_to "#{m.name}", movie_path(m)
+        %td
+          = image_tag(m.poster_url, size: "50x50") 
+        %td
+          = m.rating
+        %td
+          = m.reviews.count

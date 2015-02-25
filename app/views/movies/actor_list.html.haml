@@ -1,0 +1,23 @@
+.center
+  .panel.panel-default
+    = will_paginate @actors
+
+- if !@actors.empty?
+  %h1 
+    Actors
+  %table.table.table-hover
+    %tr
+      %th
+        Name
+      %th
+        Photo
+      %th
+        Age
+    - @actors.each do |a|
+      %tr
+        %td
+          = link_to "#{a.name}", actor_path(a)
+        %td
+          = image_tag(a.photo_url, size: "50x50") 
+        %td
+          = a.age  

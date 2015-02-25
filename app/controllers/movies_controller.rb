@@ -52,8 +52,8 @@ class MoviesController < ApplicationController
   end
 
   def add_actor
-    actor_id = params[:movie][:actor_id]
-    @movie = Movie.find(params[:id])
+    actor_id = params[:id]
+    @movie = Movie.find(params[:movie_id])
     @movie.actors << Actor.find(actor_id)
     redirect_to movie_path(@movie)
   end
@@ -91,6 +91,21 @@ class MoviesController < ApplicationController
       change_rating(@rating, "down")
       redirect_to(:back)
     end
+  end
+
+  def actor_select_list
+    @actors = Actor.ransack(name_cont: params[:actor_name]).result
+    @actors = @actors.limit(20)
+  end
+
+  def actor_list
+    @actors = Movie.find(params[:id]).actors
+    @actors = @actors.paginate(:page => params[:page], :per_page => 15)
+  end
+
+  def review_list
+    @reviews = Movie.find(params[:id]).reviews
+    @reviews = @reviews.paginate(:page => params[:page], :per_page => 15)
   end
 
   private

@@ -1,0 +1,23 @@
+.center
+  .panel.panel-default
+    = will_paginate @reviews
+
+- if !@reviews.empty?
+  %h1 
+    Reviews
+  %table.table.table-hover
+    %tr
+      %th
+        Title
+      %th  
+        Rating
+      %th
+        Comments      
+    - @reviews.each do |r|
+      %tr
+        %td
+          = link_to "#{r.title}", review_path(r)
+        %td
+          = r.rating        
+        %td
+          = r.comments.count  

@@ -27,9 +27,11 @@
   - if current_user.admin?
     .col-md-3
       .thumbnail
-        = bootstrap_form_for @movie, :method => "post" do |a|
-          = a.collection_select :actor_id, Actor.order(:name), :id ,:name
-          = a.submit "Add", class: "btn btn-primary"
+        = form_tag actor_search_list_path, :method => "get" do
+          = text_field_tag :actor_name, 'Actor name', size: 15
+          = hidden_field_tag :movie_id, @movie.id
+          = submit_tag "Add", class: "btn btn-primary"
+          
 .col-md-3
   .thumbnail
     %b
@@ -40,7 +42,7 @@
         - if current_user
           - if current_user.admin?
             = link_to "del", {:controller => "movies", :action => "delete_actor", :actor_id => a.id}, method: :delete
-    = link_to "..."    
+    = link_to "...", actor_list_path(@movie.id)    
 - if @reviews            
   .col-md-3
     .thumbnail
@@ -49,7 +51,7 @@
       - @reviews.each do |r|
         %p.list
           = link_to "#{r.title}", actor_path(r)
-        = link_to "..."              
+      = link_to "...", review_list_path(@movie.id)              
 .col-md-3
   - if current_user
     = link_to "Add review", {:controller => "reviews", :action => "new", :movie_id => @movie.id}

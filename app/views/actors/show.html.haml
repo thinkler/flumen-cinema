@@ -36,3 +36,4 @@
         - if current_user
           - if current_user.admin?
             = link_to "del", {:controller => "actors", :action => "delete_movie", :movie_id => m.id}, method: :delete
+    = link_to "...", movie_list_path    

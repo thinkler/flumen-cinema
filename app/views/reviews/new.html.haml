@@ -6,12 +6,12 @@
         %h4
           New review for
           %b
-            = Movie.find(params[:format]).name
+            = Movie.find(params[:movie_id]).name
         = bootstrap_form_for @review do |f|
           = f.text_field :title
           = f.text_area :body
           = f.range_field(:total_ball, in: 1..10)
           = f.hidden_field :user_id, :value => current_user.id
-          = f.hidden_field :movie_id, :value => params[:format]
+          = f.hidden_field :movie_id, :value => params[:movie_id]
           = f.submit "Create", method: :get
       = params    

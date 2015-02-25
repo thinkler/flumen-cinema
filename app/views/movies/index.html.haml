@@ -36,10 +36,14 @@
                   Rating:
                   = m.rating
                 - if current_user
-                  %p
+                  - if current_user.ratings.find_by(post_id: m.id)
+                    - if current_user.ratings.find_by(post_id: m.id).movie_rating == "down" || current_user.ratings.find_by(post_id: m.id).movie_rating.nil?
+                      = link_to "+", {:controller => "movies", :action => "up_vote", :id => m.id}, method: :post, class: "btn btn-info"
+                    - if current_user.ratings.find_by(post_id: m.id).movie_rating == "up" || current_user.ratings.find_by(post_id: m.id).movie_rating.nil?
+                      = link_to "-", {:controller => "movies", :action => "down_vote", :id => m.id}, method: :post, class: "btn btn-info"
+                  - else     
                     = link_to "+", {:controller => "movies", :action => "up_vote", :id => m.id}, method: :post, class: "btn btn-info"
-                    = link_to "-", {:controller => "movies", :action => "down_vote", :id => m.id}, method: :post, class: "btn btn-info"
-                    = link_to "Add review", new_review_path(m.id), class: "btn btn-info"  
+                    = link_to "-", {:controller => "movies", :action => "down_vote", :id => m.id}, method: :post, class: "btn btn-info"  
 
 .center
   .panel.panel-default

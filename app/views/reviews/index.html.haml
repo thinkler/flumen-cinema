@@ -30,8 +30,15 @@
             = r.user.email
           - if current_user
             %p
-              = link_to "+", {:controller => "reviews", :action => "up_vote", :id => r.id}, method: :post, class: "btn btn-info"
-              = link_to "-", {:controller => "reviews", :action => "down_vote", :id => r.id}, method: :post, class: "btn btn-info"
+              - if current_user
+                - if current_user.ratings.find_by(post_id: r.id)
+                  - if current_user.ratings.find_by(post_id: r.id).review_rating == "down" || current_user.ratings.find_by(post_id: r.id).review_rating.nil?
+                    = link_to "+", {:controller => "reviews", :action => "up_vote", :id => r.id}, method: :post, class: "btn btn-info"
+                  - if current_user.ratings.find_by(post_id: r.id).review_rating == "up" || current_user.ratings.find_by(post_id: r.id).review_rating.nil?
+                    = link_to "-", {:controller => "reviews", :action => "down_vote", :id => r.id}, method: :post, class: "btn btn-info"
+                - else     
+                  = link_to "+", {:controller => "reviews", :action => "up_vote", :id => r.id}, method: :post, class: "btn btn-info"
+                  = link_to "-", {:controller => "reviews", :action => "down_vote", :id => r.id}, method: :post, class: "btn btn-info"
 
 .center
   .panel.panel-default
