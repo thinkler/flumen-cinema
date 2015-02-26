@@ -8,7 +8,6 @@ class ArticlesController < ApplicationController
   add_breadcrumb "Home", :root_path
 
   def show
-    @article = Article.find(params[:id])
     @comment = Comment.new
     add_breadcrumb "#{@article.title}"
   end
@@ -28,7 +27,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
     if @article.destroy
       redirect_to root_url
     end
@@ -40,12 +38,10 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
     add_breadcrumb "Edit article"
   end
 
   def update
-    @article = Article.find(params[:id])
     if @article.update(article_params)
       redirect_to root_url
     end

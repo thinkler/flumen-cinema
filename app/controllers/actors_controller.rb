@@ -1,9 +1,11 @@
 class ActorsController < ApplicationController
 
+  include AdminModule
+  before_action :if_admin, except: [:up_vote, :down_vote, :index, :show]
+
+
   add_breadcrumb "Home", :root_path
   add_breadcrumb "Actors", :actors_path
-
-  before_action :if_admin, only: [:new, :edit, :destroy]
 
   def index
     @actors = Actor.order('name')
@@ -89,16 +91,5 @@ class ActorsController < ApplicationController
   def actors_params
     params.require(:actor).permit(:name, :age, :photo_url, :about)
   end
-
-  def if_admin
-    if current_user
-      if !current_user.admin?
-        redirect_to root_path
-      end  
-    else
-      redirect_to root_path
-    end     
-  end
-
 
 end

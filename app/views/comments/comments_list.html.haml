@@ -1,0 +1,13 @@
+.center
+  .panel.panel-default
+    = will_paginate @movies
+
+
+- if @comments
+  - @comments.each do |c|
+    .thumbnail
+      = User.find(c.user_id).email
+      %p 
+        = c.body
+
+

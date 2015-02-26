@@ -14,11 +14,6 @@
       .badge
         = @article.rating
     -#    MAKE BTN GROUP
-    - if current_user
-      %button.btn.btn-info
-        v
-      %button.btn.btn-info
-        ^
     .post-data
       = @article.created_at.strftime("%d %b. %Y")
       = @article.created_at.strftime("%H:%M")
@@ -33,6 +28,7 @@
       - if (current_user.id == c.user_id) || (current_user.admin?)
         = link_to "del", c, method: :delete
 
+= link_to "Show all comments", {:controller => "comments", :action => "comments_list", :id => @article.id, :article_id => true}, method: :get
 
 - if current_user
   = bootstrap_form_for @comment do |f|

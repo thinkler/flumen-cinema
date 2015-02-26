@@ -4,6 +4,8 @@ class ReviewsController < ApplicationController
   add_breadcrumb "Home", :root_path
   add_breadcrumb "Reviews", :reviews_path
 
+  include AdminModule
+  before_action :if_admin, except: [:up_vote, :down_vote, :index, :show, :new, :create]
 
   def index
     @reviews = Review.all
@@ -64,7 +66,7 @@ class ReviewsController < ApplicationController
       @rating.review_rating  = "up"
       change_rating(@rating, "up")
       redirect_to(:back)
-  end
+   end
   end
 
   def down_vote
@@ -108,16 +110,6 @@ class ReviewsController < ApplicationController
     else
       @rating = current_user.ratings.find_by(post_id: id)
     end
-  end
-
-  def if_admin
-    if current_user
-      if !current_user.admin?
-        redirect_to root_path
-      end  
-    else
-      redirect_to root_path
-    end     
   end
 
 end

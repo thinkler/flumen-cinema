@@ -9,7 +9,7 @@
     = @review.body
 
 
-- @review.comments.each do |c|
+- @review.comments.limit(20).each do |c|
   .thumbnail
     %b
       = User.find(c.user_id).email
@@ -19,6 +19,7 @@
       - if (current_user.id == c.user_id) || (current_user.admin?)
         = link_to "del", c, method: :delete
 
+= link_to "Show all comments", {:controller => "comments", :action => "comments_list", :id => @review.id, :review_id => true}, method: :get
 
 - if current_user
   = bootstrap_form_for @comment do |f|
