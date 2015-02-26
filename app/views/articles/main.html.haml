@@ -15,7 +15,7 @@
       %p
         = a.body
       = link_to "#{a.comments.count} Comments", article_path(a), class: "btn btn-primary"
-      %button.btn.btn-danger
+      %button.btn.btn-danger#rating{:value => a.rating}
         Rating
         .badge
           = a.rating

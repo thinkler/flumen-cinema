@@ -85,7 +85,7 @@
                   = link_to "Sign up", new_user_registration_path
             
         -#  POSTERS BLOCK
-        .col-md-4.col-sm-4.col-xs-12#side-bar
+        .col-md-4.col-sm-4.col-xs-12#to-hide
           .panel.panel-info
             .panel-heading.center
               Posters
@@ -115,7 +115,7 @@
                 %a.right.carousel-control{:role => "button", :href => "#myCar", "data-slide" => "next"}
                   .glyphicon.glyphicon-chevron-right
         -#  INFO TOPS
-        .col-md-4.col-sm-4.col-xs-12#side-bar
+        .col-md-4.col-sm-4.col-xs-12#to-hide
           #accordion.panel-group
             .panel.panel-default
               .panel-heading
@@ -127,9 +127,11 @@
                   %ul
                     - Movie.order('rating DESC').limit(3).each do |m|
                       %li
-                        %h1 
+                        %h1#text-father1 
                           = m.name
-                        %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+                        %p
+                          #text1
+                            Tohe first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
             .panel.panel-default
               .panel-heading
                 %h4.panel-title
@@ -156,6 +158,10 @@
                         %h1 
                           = r.title
                         %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+        .col-md-4.col-sm-4.col-xs-12
+          .banner.panel.panel-default
+            = link_to image_tag("Animation.gif", size: "360x200"), "http://www.google.com/"                     
+            
 
 
 
