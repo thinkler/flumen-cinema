@@ -3,6 +3,8 @@ class ArticlesController < ApplicationController
   before_action :check_in, except: [:destroy, :create, :up_vote, :down_vote, :main, :show]
   before_action :rating_check, only: [:up_vote, :down_vote]
 
+  before_action :find_article, only: [:show, :destroy, :edit, :update]
+
   add_breadcrumb "Home", :root_path
 
   def show
@@ -93,14 +95,13 @@ class ArticlesController < ApplicationController
 
   def change_rating(rating, direction)
     rating.save
-    article = Article.find(params[:id])
-
+    @article = Article.find(params[:id])
     if direction == "up"
-      article.rating += 1
+      @article.rating += 1
     elsif direction == "down"
-      article.rating -= 1
+      @article.rating -= 1
     end
-    article.save
+    @article.save
   end
 
   def rating_check
@@ -113,5 +114,9 @@ class ArticlesController < ApplicationController
       @rating = current_user.ratings.find_by(post_id: id)
     end
   end
+
+  def find_article
+    @article = Article.find(params[:id])
+  end  
 
 end
