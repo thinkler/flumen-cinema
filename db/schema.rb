@@ -28,6 +28,11 @@ ActiveRecord::Schema.define(version: 20150224180540) do
     t.integer "movie_id"
   end
 
+  create_table "article_ratings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "articles", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -46,6 +51,11 @@ ActiveRecord::Schema.define(version: 20150224180540) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+  end
+
+  create_table "movie_ratings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "movies", force: :cascade do |t|
@@ -70,6 +80,11 @@ ActiveRecord::Schema.define(version: 20150224180540) do
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
     t.integer  "post_id"
+  end
+
+  create_table "review_ratings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reviews", force: :cascade do |t|
