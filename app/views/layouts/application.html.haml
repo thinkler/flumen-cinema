@@ -43,8 +43,9 @@
         %ul.user-info.nav.navbar-nav.navbar-right
         .center.search
           = form_tag search_path, method: :get do
-            = text_field_tag :search
-            = submit_tag "Search", class: "btn btn-default"
+            .form-inline
+              = text_field_tag :search, "", class: "form-control"
+              = submit_tag "Search", class: "btn btn-default"
 
               
   %body
@@ -54,111 +55,105 @@
     -#  = alert if alert
 
     .container
-      .row
-        .col-md-8.col-sm-8.col-xs-12#content
-          .breadcrumb
-            = render_breadcrumbs
-          -if flash[:success] 
-            .alert.alert-success    
-              = flash[:success]
-          -if flash[:error] 
-            .alert.alert-warning    
-              = flash[:error]    
-            
-          = yield
+      .col-md-8.col-sm-8.col-xs-12#content
+        .breadcrumb
+          = render_breadcrumbs
+        -if flash[:success] 
+          .alert.alert-success    
+            = flash[:success]
+        -if flash[:error] 
+          .alert.alert-warning    
+            = flash[:error]    
+          
+        = yield
 
-        -#USER PANEL
-        .col-md-4.col-sm-4.col-xs-12
-          .panel.panel-default
-            .panel-heading.center User info
-            .panel-body.cute-body
-              - if user_signed_in?
-                - if current_user.admin?
-                  = render partial: "articles/admin_panel"
-                - else
-                  = render partial: "articles/user_panel"
-                = link_to "Exit", destroy_user_session_path, method: :delete
+      -#USER PANEL
+      .col-md-4.col-sm-4.col-xs-12
+        .panel.panel-default
+          .panel-heading.center User info
+          .panel-body.cute-body
+            - if user_signed_in?
+              - if current_user.admin?
+                = render partial: "articles/admin_panel"
               - else
-                %li
-                  = link_to "Sign in", new_user_session_path
-                %li
-                  = link_to "Sign up", new_user_registration_path
-            
-        -#  POSTERS BLOCK
-        .col-md-4.col-sm-4.col-xs-12#to-hide
-          .panel.panel-info
-            .panel-heading.center
-              Posters
-            .panel-body
-              #myCar.carousel.slide{"data-ride" => "carousel"}
+                = render partial: "articles/user_panel"
+              = link_to "Exit", destroy_user_session_path, method: :delete
+            - else
+              %li
+                = link_to "Sign in", new_user_session_path
+              %li
+                = link_to "Sign up", new_user_registration_path
+        .panel.panel-info
+          .panel-heading.center
+            Posters
+          .panel-body
+            #myCar.carousel.slide{"data-ride" => "carousel"}
 
-                -#Slider indicator
-                %ol.carousel-indicators
-                  %li.active{"data-target" => "#myCar", "data-slide-to" => "0"}
-                  %li{"data-target" => "#myCar", "data-slide-to" => "1"}
-                  %li{"data-target" => "#myCar", "data-slide-to" => "2"}
-                  %li{"data-target" => "#myCar", "data-slide-to" => "3"}
+              -#Slider indicator
+              %ol.carousel-indicators
+                %li.active{"data-target" => "#myCar", "data-slide-to" => "0"}
+                %li{"data-target" => "#myCar", "data-slide-to" => "1"}
+                %li{"data-target" => "#myCar", "data-slide-to" => "2"}
+                %li{"data-target" => "#myCar", "data-slide-to" => "3"}
 
-                -#Slides
-                - if Movie.first
-                  .carousel-inner
-                    .item.active
-                      = image_tag(Movie.first.poster_url)
-                    - Movie.last(3).each do |m|
-                      .item
-                        = image_tag(m.poster_url)
+              -#Slides
+              - if Movie.first
+                .carousel-inner
+                  .item.active
+                    = image_tag(Movie.first.poster_url)
+                  - Movie.last(3).each do |m|
+                    .item
+                      = image_tag(m.poster_url)
 
-                -#Slider arrows
-                %a.left.carousel-control{:role => "button", :href => "#myCar", "data-slide" => "prev"}
-                  .glyphicon.glyphicon-chevron-left
+              -#Slider arrows
+              %a.left.carousel-control{:role => "button", :href => "#myCar", "data-slide" => "prev"}
+                .glyphicon.glyphicon-chevron-left
 
-                %a.right.carousel-control{:role => "button", :href => "#myCar", "data-slide" => "next"}
-                  .glyphicon.glyphicon-chevron-right
-        -#  INFO TOPS
-        .col-md-4.col-sm-4.col-xs-12#to-hide
-          #accordion.panel-group
-            .panel.panel-default
-              .panel-heading
-                %h4.panel-title
-                  %a{:href => "#collapse-1", "data-parent" => "#accordion", "data-toggle" => "collapse"}
-                    Top rated movie
-              #collapse-1.panel-collapse.collapse.in
-                .panel-body
-                  %ul
-                    - Movie.order('rating DESC').limit(3).each do |m|
-                      %li
-                        %h1#text-father1 
-                          = m.name
-                        %p
-                          #text1
-                            Tohe first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
-            .panel.panel-default
-              .panel-heading
-                %h4.panel-title
-                  %a{:href => "#collapse-2", "data-parent" => "#accordion", "data-toggle" => "collapse"}
-                    Top rated article
-              #collapse-2.panel-collapse.collapse
-                .panel-body
-                  %ul
-                    - Article.order('rating DESC').limit(3).each do |a|
-                      %li
-                        %h1 
-                          = a.title
-                        %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
-            .panel.panel-default
-              .panel-heading
-                %h4.panel-title
-                  %a{:href => "#collapse-3", "data-parent" => "#accordion", "data-toggle" => "collapse"}
-                    Top rated reviews 
-              #collapse-3.panel-collapse.collapse
-                .panel-body
-                  %ul
-                    - Review.order('rating DESC').limit(3).each do |r|
-                      %li
-                        %h1 
-                          = r.title
-                        %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
-        
+              %a.right.carousel-control{:role => "button", :href => "#myCar", "data-slide" => "next"}
+                .glyphicon.glyphicon-chevron-right
+        #accordion.panel-group
+          .panel.panel-default
+            .panel-heading
+              %h4.panel-title
+                %a{:href => "#collapse-1", "data-parent" => "#accordion", "data-toggle" => "collapse"}
+                  Top rated movie
+            #collapse-1.panel-collapse.collapse.in
+              .panel-body
+                %ul
+                  - Movie.order('rating DESC').limit(3).each do |m|
+                    %li
+                      %h1#text-father1 
+                        = m.name
+                      %p
+                        #text1
+                          Tohe first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+          .panel.panel-default
+            .panel-heading
+              %h4.panel-title
+                %a{:href => "#collapse-2", "data-parent" => "#accordion", "data-toggle" => "collapse"}
+                  Top rated article
+            #collapse-2.panel-collapse.collapse
+              .panel-body
+                %ul
+                  - Article.order('rating DESC').limit(3).each do |a|
+                    %li
+                      %h1 
+                        = a.title
+                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+          .panel.panel-default
+            .panel-heading
+              %h4.panel-title
+                %a{:href => "#collapse-3", "data-parent" => "#accordion", "data-toggle" => "collapse"}
+                  Top rated reviews 
+            #collapse-3.panel-collapse.collapse
+              .panel-body
+                %ul
+                  - Review.order('rating DESC').limit(3).each do |r|
+                    %li
+                      %h1 
+                        = r.title
+                      %p The first text editors were "line editors" oriented to teleprinter- or typewriter-style terminals without displays...
+      
 
 
 

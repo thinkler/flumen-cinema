@@ -14,13 +14,13 @@
           %h2.center
             = link_to "#{r.title}", review_path(r)
           %p
-            %b To movie:
+            %b To:
             = link_to "#{r.movie.name}", movie_path(r.movie)
           %p
             %b Body:
             = r.body
           %p
-            %b Total ball:
+            %b Total score:
             = r.total_ball
           %p
             %b Rating:

@@ -3,11 +3,9 @@
     %h3
       = @review.title
     to
-    %h3
-      = link_to "#{@review.movie.name}", movie_path(@review.movie)
+    = link_to "#{@review.movie.name}", movie_path(@review.movie)
   %p
     = @review.body
-
 
 - @review.comments.limit(20).each do |c|
   .thumbnail
