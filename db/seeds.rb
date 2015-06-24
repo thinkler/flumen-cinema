@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Actor.create(name: "Name", age: 34,  photo_url: "https://api.fnkr.net/testimg/350x200/00CED1/FFF/?text=img+placeholder")
