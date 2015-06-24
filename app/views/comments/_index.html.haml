@@ -4,6 +4,9 @@
       %b= User.find(c.user_id).email
       %p 
         = c.body
+      - if current_user
+        - if (current_user.id == c.user_id) || (current_user.admin?)
+          = link_to "del", c, method: :delete  
 
 .center
   = will_paginate comments, renderer: BootstrapPagination::Rails 

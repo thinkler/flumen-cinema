@@ -1,6 +1,4 @@
-= params          
-
-- if !@actors.empty?
+- unless @actors.empty?
   %h1 
     Actors
   %table.table.table-hover
@@ -11,13 +9,15 @@
         Photo
       %th
         Age
+      %th
+        Option  
     - @actors.each do |a|
       %tr
         %td
           = link_to "#{a.name}", actor_path(a)
         %td
-          = image_tag(a.photo_url, size: "50x50") 
+          = image_tag(a.photo_url, size: "70x100") 
         %td
           = a.age  
         %td
-          = link_to "Select", {:controller => "movies", :action => "add_actor", :id => a.id, :movie_id => params[:movie_id]}, method: :post  
+          = link_to "Select", {:controller => "movies", :action => "add_actor", :id => a.id, :movie_id => params[:movie_id]}, method: :post, class: "btn btn-info"

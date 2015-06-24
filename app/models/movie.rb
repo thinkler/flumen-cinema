@@ -3,6 +3,8 @@ class Movie < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_and_belongs_to_many :actors, -> { uniq }, dependent: :destroy
 
+  validates :name, :genre, :box_office, :desc, :poster_url, presence: true
+
   def calculate_ball
 
 	  	r_count = 0

@@ -22,9 +22,9 @@
     - if current_user.admin?
       .col-md-6.form-inline
         = form_tag movie_search_list_path, :method => "get" do
-          = text_field_tag :movie_name, 'Movie name', size: 15, class: "form-control"
+          = text_field_tag :movie_name, nil, placeholder: 'Actor name', size: 15, class: "form-control"
           = hidden_field_tag :actor_id, @actor.id
           = submit_tag "Add", class: "btn btn-primary"
 
 .col-md-12
-  = render "movies/index", movies: @movies 
+  = render "movies/short_list", movies: @movies 

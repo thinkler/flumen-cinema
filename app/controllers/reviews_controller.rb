@@ -15,6 +15,7 @@ class ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @comment = Comment.new
+    @comments = @review.comments.paginate(:page => params[:page], :per_page => 10)
     add_breadcrumb "#{@review.title}"
   end
 
@@ -32,7 +33,7 @@ class ReviewsController < ApplicationController
         redirect_to reviews_path
       end
     else
-      redirect_to new_review_path
+      redirect_to reviews_path
     end
   end
 

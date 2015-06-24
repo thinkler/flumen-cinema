@@ -21,5 +21,5 @@ end
 end
 
 10.times do
-  Movie.create(name: "Movie", box_office: 300, desc: LOREM, poster_url: "http://cdn.playbuzz.com/cdn/99e6ffb5-29c3-443c-8c0f-1a742e9ad385/1613fbe4-3314-4d54-8b3b-357b583f9d8b.jpg")
+  Movie.create(name: "Movie", genre: "Genre", box_office: 300, desc: LOREM, poster_url: "http://cdn.playbuzz.com/cdn/99e6ffb5-29c3-443c-8c0f-1a742e9ad385/1613fbe4-3314-4d54-8b3b-357b583f9d8b.jpg")
 end

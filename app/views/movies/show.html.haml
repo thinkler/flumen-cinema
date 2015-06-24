@@ -1,57 +1,67 @@
 %h1.center
   = @movie.name
+  - if current_user
+    - if current_user.admin?
+      .btn-group
+        = link_to "EDIT", edit_movie_path(@movie), class: "btn btn-default"
+        = link_to "DEL", @movie, method: :delete, class: "btn btn-danger"
+
+.col-md-6.center
+  = image_tag(@movie.poster_url, size: "280x400")
 
 .col-md-6
-  .thumbnail
-    = image_tag(@movie.poster_url, size: "380x500")
+  %p
+    %b
+      Genre:
+    = @movie.genre
+  %p
+    %b
+      Box office:
+    = "#{@movie.box_office}" + "$"
+  %p
+    %b
+      Users score:
+    = @movie.total_ball      
+  %h3 Desctiption:
+  = @movie.desc
+  %hr
 
-.col-md-6
-  .thumbnail
-    %p
-      %b
-        Genre:
-      = @movie.genre
-    %p
-      %b
-        Box office:
-      = "#{@movie.box_office}" + "$"
-    %p
-      %b
-        Description:
-      = @movie.desc
-    %p
-      %b
-        Users score:
-      = @movie.total_ball    
 - if current_user
   - if current_user.admin?
+    .col-md-3.form-inline
+      = form_tag actor_search_list_path, :method => "get" do
+        = text_field_tag :actor_name, nil, placeholder: 'Actor name', size: 15, class: "form-control"
+        = hidden_field_tag :movie_id, @movie.id
+        = submit_tag "Add", class: "btn btn-info"
     .col-md-3
-      .thumbnail
-        = form_tag actor_search_list_path, :method => "get" do
-          = text_field_tag :actor_name, 'Actor name', size: 15
-          = hidden_field_tag :movie_id, @movie.id
-          = submit_tag "Add", class: "btn btn-primary"
-          
-.col-md-3
-  .thumbnail
+      - if current_user
+        = link_to "Add review", {:controller => "reviews", :action => "new", :movie_id => @movie.id}, class: "btn btn-info"
+
+.col-md-12
+  .col-md-6
+    %hr
     %b
       Actors:
+      %br
+      %br
     - @actors.each do |a|
-      %p.list
-        = link_to "#{a.name}", actor_path(a)
+      %table.table-hover
+      %tr
+        %td= image_tag(a.photo_url, size: "70x100") 
+        %td= link_to "#{a.name}", actor_path(a)
+        %br
         - if current_user
           - if current_user.admin?
             = link_to "del", {:controller => "movies", :action => "delete_actor", :actor_id => a.id}, method: :delete
-    = link_to "...", actor_list_path(@movie.id)    
-- if @reviews            
-  .col-md-3
-    .thumbnail
+        %br
+    = link_to "Full list", actor_list_path(@movie.id)    
+  - if @reviews            
+    .col-md-6
+      %hr
       %b
         Reviews:
+        %br
       - @reviews.each do |r|
         %p.list
-          = link_to "#{r.title}", actor_path(r)
-      = link_to "...", review_list_path(@movie.id)              
-.col-md-3
-  - if current_user
-    = link_to "Add review", {:controller => "reviews", :action => "new", :movie_id => @movie.id}
+          %h3= link_to "#{r.title}", actor_path(r)
+      = link_to "Full list", review_list_path(@movie.id)              

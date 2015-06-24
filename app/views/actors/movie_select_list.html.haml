@@ -10,18 +10,19 @@
       %th
         Rating
       %th
-        Reviews    
+        Reviews score    
       %th    
+        Option
     - @movies.each do |m|
       %tr
         %td
           = link_to "#{m.name}", movie_path(m)
         %td
-          = image_tag(m.poster_url, size: "50x50") 
+          = image_tag(m.poster_url, size: "70x100") 
         %td
           = m.rating        
         %td
-          = m.reviews.count     
+          = m.total_ball  
         %td
-          = link_to "Select", {:controller => "actors", :action => "add_movie", :id => m.id, :actor_id => params[:actor_id]}, method: :post
+          = link_to "Select", {:controller => "actors", :action => "add_movie", :id => m.id, :actor_id => params[:actor_id]}, method: :post, class: "btn btn-info"
          

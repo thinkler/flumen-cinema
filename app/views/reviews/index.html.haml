@@ -1,44 +1,40 @@
-.center
-  .panel.panel-default
-    = will_paginate @reviews
 
-.container
-  .col-md-8
-    - @reviews.each do |r|
-      .thumbnail
-        - if current_user
-          - if current_user.admin? || r.user_id == current_user.id
-            = link_to "DEL", r, method: :delete, class: "btn btn-danger"
-            = link_to "EDIT", edit_review_path(r), class: "btn btn-info"
-        %h2.center
-          = link_to "#{r.title}", review_path(r)
-        %p
-          %b To:
-          = link_to "#{r.movie.name}", movie_path(r.movie)
-        %p
-          %b Body:
-          = r.body
-        %p
-          %b Total score:
-          = r.total_ball
-        %p
-          %b Rating:
-          = r.rating
-        %p
-          %b By:
-          = r.user.email
-        - if current_user
-          %p
-            - if current_user
-              - if current_user.ratings.find_by(post_id: r.id)
-                - if current_user.ratings.find_by(post_id: r.id).review_rating == "down" || current_user.ratings.find_by(post_id: r.id).review_rating.nil?
-                  = link_to "+", {:controller => "reviews", :action => "up_vote", :id => r.id}, method: :post, class: "btn btn-info"
-                - if current_user.ratings.find_by(post_id: r.id).review_rating == "up" || current_user.ratings.find_by(post_id: r.id).review_rating.nil?
-                  = link_to "-", {:controller => "reviews", :action => "down_vote", :id => r.id}, method: :post, class: "btn btn-info"
-              - else     
-                = link_to "+", {:controller => "reviews", :action => "up_vote", :id => r.id}, method: :post, class: "btn btn-info"
-                = link_to "-", {:controller => "reviews", :action => "down_vote", :id => r.id}, method: :post, class: "btn btn-info"
+- @reviews.each do |r|
+  - if current_user
+    - if current_user.admin? || r.user_id == current_user.id
+      .btn-group
+        = link_to "EDIT", edit_review_path(r), class: "btn btn-default"
+        = link_to "DEL", r, method: :delete, class: "btn btn-danger"
+  %h2.center
+    = link_to "#{r.title}", review_path(r)
+  %p
+    %b To:
+    = link_to "#{r.movie.name}", movie_path(r.movie)
+  %p
+    %b Body:
+    = r.body
+  %p
+    %b Total score:
+    = r.total_ball
+  %p
+    %b Rating:
+    = r.rating
+  %p
+    %b By:
+    = r.user.email
+  - if current_user
+    %p.btn-group
+      - if current_user
+        - if current_user.ratings.find_by(post_id: r.id)
+          - if current_user.ratings.find_by(post_id: r.id).review_rating == "down" || current_user.ratings.find_by(post_id: r.id).review_rating.nil?
+            = link_to "+", {:controller => "reviews", :action => "up_vote", :id => r.id}, method: :post, class: "btn btn-default"
+          - if current_user.ratings.find_by(post_id: r.id).review_rating == "up" || current_user.ratings.find_by(post_id: r.id).review_rating.nil?
+            = link_to "-", {:controller => "reviews", :action => "down_vote", :id => r.id}, method: :post, class: "btn btn-default"
+        - else     
+          = link_to "+", {:controller => "reviews", :action => "up_vote", :id => r.id}, method: :post, class: "btn btn-default"
+          = link_to "-", {:controller => "reviews", :action => "down_vote", :id => r.id}, method: :post, class: "btn btn-default"
+%hr          
 
 .center
   .panel.panel-default
-    = will_paginate @reviews
+    = will_paginate @reviews, renderer: BootstrapPagination::Rails 
