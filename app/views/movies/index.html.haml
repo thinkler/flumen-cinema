@@ -1,49 +1,47 @@
-.center
-  .panel.panel-default
-    = will_paginate @movies
+.center.pagination
+  = will_paginate @movies
 
 .container
-  .row
-    .col-md-8
-      - @movies.each do |m|
-        .col-md-6
-          - if current_user
-            - if current_user.admin?
-              = link_to "DEL", m, method: :delete, class: "btn btn-danger"
-              = link_to "EDIT", edit_movie_path(m), class: "btn btn-info"
-          %table.table.table-hover
-            %tr
-              %td
-                = image_tag(m.poster_url, size: "180x230")
-              %td
-                %h3
-                  = m.name
-                %p
-                  Box office:
-                  = m.box_office
-                %p
-                  Actors:
-                  - m.actors.limit(3).each do |a|
-                    = link_to "#{a.name}", actor_path(a)  
-                  = link_to "...", movie_path(m)    
-                %p
-                  Genre:
-                  = m.genre
-                %p
-                  Duration:
-                = link_to "View", movie_path(m), class: "btn btn-success"
-                %p
-                  Rating:
-                  = m.rating
-                - if current_user
-                  - if current_user.ratings.find_by(post_id: m.id)
-                    - if current_user.ratings.find_by(post_id: m.id).movie_rating == "down" || current_user.ratings.find_by(post_id: m.id).movie_rating.nil?
-                      = link_to "+", {:controller => "movies", :action => "up_vote", :id => m.id}, method: :post, class: "btn btn-info"
-                    - if current_user.ratings.find_by(post_id: m.id).movie_rating == "up" || current_user.ratings.find_by(post_id: m.id).movie_rating.nil?
-                      = link_to "-", {:controller => "movies", :action => "down_vote", :id => m.id}, method: :post, class: "btn btn-info"
-                  - else     
+  .col-md-8
+    - @movies.each do |m|
+      .col-md-6
+        - if current_user
+          - if current_user.admin?
+            = link_to "DEL", m, method: :delete, class: "btn btn-danger"
+            = link_to "EDIT", edit_movie_path(m), class: "btn btn-info"
+        %table.table.table-hover
+          %tr
+            %td
+              = image_tag(m.poster_url, size: "180x230")
+            %td
+              %h3
+                = m.name
+              %p
+                Box office:
+                = m.box_office
+              %p
+                Actors:
+                - m.actors.limit(3).each do |a|
+                  = link_to "#{a.name}", actor_path(a)  
+                = link_to "...", movie_path(m)    
+              %p
+                Genre:
+                = m.genre
+              %p
+                Duration:
+              = link_to "View", movie_path(m), class: "btn btn-success"
+              %p
+                Rating:
+                = m.rating
+              - if current_user
+                - if current_user.ratings.find_by(post_id: m.id)
+                  - if current_user.ratings.find_by(post_id: m.id).movie_rating == "down" || current_user.ratings.find_by(post_id: m.id).movie_rating.nil?
                     = link_to "+", {:controller => "movies", :action => "up_vote", :id => m.id}, method: :post, class: "btn btn-info"
-                    = link_to "-", {:controller => "movies", :action => "down_vote", :id => m.id}, method: :post, class: "btn btn-info"  
+                  - if current_user.ratings.find_by(post_id: m.id).movie_rating == "up" || current_user.ratings.find_by(post_id: m.id).movie_rating.nil?
+                    = link_to "-", {:controller => "movies", :action => "down_vote", :id => m.id}, method: :post, class: "btn btn-info"
+                - else     
+                  = link_to "+", {:controller => "movies", :action => "up_vote", :id => m.id}, method: :post, class: "btn btn-info"
+                  = link_to "-", {:controller => "movies", :action => "down_vote", :id => m.id}, method: :post, class: "btn btn-info"  
 
 .center
   .panel.panel-default

@@ -1,39 +1,30 @@
-- if current_user
-  - if current_user.admin?
-    %td
-      = link_to "DEL", @actor, method: :delete, class: "btn btn-danger"
-      = link_to "EDIT", edit_actor_path(@actor), class: "btn btn-info"
-
 %h1.center
   = @actor.name
   (
   = @actor.age
   )
-.col-md-6
-  .thumbnail
-    = image_tag(@actor.photo_url)
+  - if current_user
+    - if current_user.admin?
+      .btn-group
+        = link_to "EDIT", edit_actor_path(@actor), class: "btn btn-default"
+        = link_to "DEL", @actor, method: :delete, class: "btn btn-danger"
+.col-md-6.center
+  = image_tag(@actor.photo_url, size: "250x400")
 
 .col-md-6
-  .thumbnail
-    %h3.center About
-    %p
-      = @actor.about
-- if current_user
-  - if current_user.admin?
-    .col-md-3
-      .thumbnail
+  %h3.center About
+  %p
+    = @actor.about
+
+.col-md-12
+  %hr
+  - if current_user
+    - if current_user.admin?
+      .col-md-6.form-inline
         = form_tag movie_search_list_path, :method => "get" do
-          = text_field_tag :movie_name, 'Movie name', size: 15
+          = text_field_tag :movie_name, 'Movie name', size: 15, class: "form-control"
           = hidden_field_tag :actor_id, @actor.id
           = submit_tag "Add", class: "btn btn-primary"
-.col-md-3
-  .thumbnail
-    %b
-      Played in movies:
-    - @movies.each do |m|
-      %p
-        = link_to "#{m.name}", movie_path(m)
-        - if current_user
-          - if current_user.admin?
-            = link_to "del", {:controller => "actors", :action => "delete_movie", :movie_id => m.id}, method: :delete
-    = link_to "...", movie_list_path    
+
+.col-md-12
+  = render "movies/index", movies: @movies 

@@ -14,12 +14,12 @@ class ActorsController < ApplicationController
     if params[:q]
       @actors = @q.result
     end  
-    @actors = @actors.paginate(:page => params[:page], :per_page => 16)
+    @actors = @actors.paginate(:page => params[:page], :per_page => 9)
   end
 
   def show
     @actor = Actor.find(params[:id])
-    @movies = @actor.movies
+    @movies = @actor.movies.paginate(:page => params[:page], :per_page => 6)
     add_breadcrumb "#{@actor.name}"
   end
 

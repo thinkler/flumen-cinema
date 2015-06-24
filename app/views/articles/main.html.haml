@@ -1,41 +1,40 @@
-.center
-  .panel.panel-default
-    = will_paginate @articles
-
 - @articles.each do |a|
-  - if current_user
-    - if current_user.admin?
-      = link_to "DEL", a, method: :delete, class: "btn btn-danger"
-      = link_to "EDIT", edit_article_path(a), class: "btn btn-info"
-  .thumbnail
-    = image_tag(a.img_url)
+  
+  .article  
+    .center
+      = image_tag(a.img_url, size: "600x400")
     .caption
       %h2
-        = link_to "#{a.title}", article_path(a)
+        .title
+          = link_to "#{a.title}", article_path(a)
+        - if current_user
+          - if current_user.admin?
+            = link_to "EDIT", edit_article_path(a), class: "btn btn-default"
+            = link_to "DELETE", a, method: :delete, class: "btn btn-danger"
       %p
         = a.body
-      = link_to "#{a.comments.count} Comments", article_path(a), class: "btn btn-primary"
-      %button.btn.btn-danger#rating{:value => a.rating}
-        Rating
-        .badge
-          = a.rating
-      -#    MAKE BTN GROUP
-      - if current_user
-        - if current_user.ratings.find_by(post_id: a.id)
-          - if current_user.ratings.find_by(post_id: a.id).article_rating == "down" || current_user.ratings.find_by(post_id: a.id).article_rating.nil?
-            = link_to "+", {:controller => "articles", :action => "up_vote", :id => a.id}, method: :post, class: "btn btn-info"
-          - if current_user.ratings.find_by(post_id: a.id).article_rating == "up" || current_user.ratings.find_by(post_id: a.id).article_rating.nil?
-            = link_to "-", {:controller => "articles", :action => "down_vote", :id => a.id}, method: :post, class: "btn btn-info"
-        - else     
-          = link_to "+", {:controller => "articles", :action => "up_vote", :id => a.id}, method: :post, class: "btn btn-info"
-          = link_to "-", {:controller => "articles", :action => "down_vote", :id => a.id}, method: :post, class: "btn btn-info"
+      .btn-group
+        = link_to "#{a.comments.count} Comments", article_path(a), class: "btn btn-default"
+        %button.btn.btn-info#rating{:value => a.rating}
+          Rating
+          .badge
+            = a.rating
+      .btn-group
+        - if current_user
+          - if current_user.ratings.find_by(post_id: a.id)
+            - if current_user.ratings.find_by(post_id: a.id).article_rating == "down" || current_user.ratings.find_by(post_id: a.id).article_rating.nil?
+              = link_to "+", {:controller => "articles", :action => "up_vote", :id => a.id}, method: :post, class: "btn btn-default"
+            - if current_user.ratings.find_by(post_id: a.id).article_rating == "up" || current_user.ratings.find_by(post_id: a.id).article_rating.nil?
+              = link_to "-", {:controller => "articles", :action => "down_vote", :id => a.id}, method: :post, class: "btn btn-default"
+          - else     
+            = link_to "+", {:controller => "articles", :action => "up_vote", :id => a.id}, method: :post, class: "btn btn-default"
+            = link_to "-", {:controller => "articles", :action => "down_vote", :id => a.id}, method: :post, class: "btn btn-default"
       .post-data
         = a.created_at.strftime("%d %b. %Y")
         = a.created_at.strftime("%H:%M")
-
+      %hr
 .center
-  .panel.panel-default
-    = will_paginate @articles
+  = will_paginate @articles, renderer: BootstrapPagination::Rails 
 
 
 

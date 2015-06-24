@@ -1,0 +1,33 @@
+%hr
+  %table.table.table-hover.short-list
+    %th Poster
+    %th Title
+    %th Box office
+    %th Actors
+    %th Genre
+    %th Rating
+    - movies.each do |m|
+      %tr
+        %td
+          = image_tag(m.poster_url, size: "100x150")
+        %td
+          = m.name
+        %td    
+          %p
+            = m.box_office
+        %td    
+          %p
+            - m.actors.limit(3).each do |a|
+              = link_to "#{a.name}", actor_path(a)  
+            = link_to "...", movie_path(m)    
+        %td    
+          %p
+            = m.genre
+        %td  
+          %p
+            Rating:
+            = m.rating
+            
+.center
+  .panel.panel-default
+    = will_paginate movies, renderer: BootstrapPagination::Rails 

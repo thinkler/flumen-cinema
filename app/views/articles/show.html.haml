@@ -1,36 +1,38 @@
-- if current_user
-  - if current_user.admin?
-    = link_to "DEL", @article, method: :delete, class: "btn btn-danger"
-    = link_to "EDIT", edit_article_path(@article), class: "btn btn-info"
-.thumbnail
-  = image_tag(@article.img_url)
-  .caption
-    %h2
-      = @article.title
-    %p
-      = @article.body
-    %button.btn.btn-danger
-      Rating
-      .badge
-        = @article.rating
-    -#    MAKE BTN GROUP
-    .post-data
-      = @article.created_at.strftime("%d %b. %Y")
-      = @article.created_at.strftime("%H:%M")
-
-- @article.comments.each do |c|
-  .thumbnail
-    %b
-      = User.find(c.user_id).email
-    %p
-      = c.body
+.center
+  = image_tag(@article.img_url, size: "600x400")
+.caption
+  %h2
+    = @article.title
     - if current_user
-      - if (current_user.id == c.user_id) || (current_user.admin?)
-        = link_to "del", c, method: :delete
+      - if current_user.admin?
+        = link_to "EDIT", edit_article_path(@article), class: "btn btn-default"
+        = link_to "DEL", @article, method: :delete, class: "btn btn-danger" 
+  %p
+    = @article.body
+  %button.btn.btn-info
+    Rating
+    .badge
+      = @article.rating
+  .btn-group
+    - if current_user
+      - if current_user.ratings.find_by(post_id: @article.id)
+        - if current_user.ratings.find_by(post_id: @article.id).article_rating == "down" || current_user.ratings.find_by(post_id: @article.id).article_rating.nil?
+          = link_to "+", {:controller => "articles", :action => "up_vote", :id => @article.id}, method: :post, class: "btn btn-default"
+        - if current_user.ratings.find_by(post_id: @article.id).article_rating == "up" || current_user.ratings.find_by(post_id: @article.id).article_rating.nil?
+          = link_to "-", {:controller => "articles", :action => "down_vote", :id => @article.id}, method: :post, class: "btn btn-default"
+      - else     
+        = link_to "+", {:controller => "articles", :action => "up_vote", :id => @article.id}, method: :post, class: "btn btn-default"
+        = link_to "-", {:controller => "articles", :action => "down_vote", :id => @article.id}, method: :post, class: "btn btn-default"    
+  .post-data
+    = @article.created_at.strftime("%d %b. %Y")
+    = @article.created_at.strftime("%H:%M")
+  
+%hr
 
-= link_to "Show all comments", {:controller => "comments", :action => "comments_list", :id => @article.id, :article_id => true}, method: :get
+= render "comments/index", comments: @comments
 
 - if current_user
+  %h3 New comment
   = bootstrap_form_for @comment do |f|
     = f.text_area :body
     = f.hidden_field :article_id, :value => @article.id

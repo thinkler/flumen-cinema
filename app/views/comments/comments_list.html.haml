@@ -1,6 +1,6 @@
 .center
   .panel.panel-default
-    = will_paginate @movies
+    = will_paginate @movies, renderer: BootstrapPagination::Rails 
 
 
 - if @comments
@@ -9,5 +9,6 @@
       = User.find(c.user_id).email
       %p 
         = c.body
+
 
 

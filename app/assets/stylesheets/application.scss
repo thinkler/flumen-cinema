@@ -20,6 +20,26 @@
 @import "bootstrap";
 @import "font-awesome";
 
+
+.short-list {
+  font-size: 20px;
+}
+
+.title {
+  a {
+    color: black;
+  }
+}
+
+.actor {
+  padding-left: 20px;
+}
+
+.article {
+  margin-bottom: 40px;
+  padding-bottom: 10px;
+}
+
 .navbar-inverse .navbar-brand {
   color: white;
 }
@@ -39,10 +59,6 @@
 
 .admin:link {
   color: darkred;
-}
-
-.thumbnail:hover {
-  background-color: #DCDCDC;
 }
 
 .cute-body {

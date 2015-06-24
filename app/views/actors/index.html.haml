@@ -1,18 +1,15 @@
-.center
-  .panel.panel-default
-    = will_paginate @actrors
-    
 %br
 .container
   .row
-    .col-md-8
+    .col-md-7
       - @actors.each do |a|
-        .col-md-3
+        .col-md-4.actor
           - if current_user
             - if current_user
               %td
-                = link_to "DEL", a, method: :delete, class: "btn btn-danger"
-                = link_to "EDIT", edit_actor_path(a), class: "btn btn-info"
+                .btn-group
+                  = link_to "EDIT", edit_actor_path(a), class: "btn btn-default"
+                  = link_to "DEL", a, method: :delete, class: "btn btn-danger"
           .thumbnail
             = image_tag(a.photo_url, size: "180x200")
             %h4
@@ -21,8 +18,8 @@
               %h4
                 %b Age:
                 = a.age
-            = link_to "View", actor_path(a), class: "btn btn-success"
+            = link_to "View", actor_path(a), class: "btn btn-info"
 
 .center
   .panel.panel-default
-    = will_paginate @actrors
+    = will_paginate @actrors, renderer: BootstrapPagination::Rails 

@@ -1,0 +1,10 @@
+- if comments
+  - comments.each do |c|
+    .thumbnail
+      %b= User.find(c.user_id).email
+      %p 
+        = c.body
+
+.center
+  = will_paginate comments, renderer: BootstrapPagination::Rails 
+

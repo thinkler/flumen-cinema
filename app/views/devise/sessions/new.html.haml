@@ -2,8 +2,6 @@
   .row
     .col-md-4.col-md-offset-2.col-xs-12.col-sm-4.col-sm-offset-2
       .jumbotron
-        = notice
-        = alert
         %h2 Log in
         = bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           .field
@@ -15,7 +13,6 @@
           - if devise_mapping.rememberable?
             .field
               = f.check_box :remember_me
-              = f.label :remember_me
           .actions
             = f.submit "Log in"
         = render "devise/shared/links"

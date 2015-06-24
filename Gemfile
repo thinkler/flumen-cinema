@@ -9,6 +9,8 @@ gem 'hirb'
 gem 'will_paginate'
 gem 'ransack'
 gem "breadcrumbs_on_rails"
+gem 'will_paginate-bootstrap'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
